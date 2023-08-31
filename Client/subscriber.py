@@ -12,8 +12,12 @@ def on_message(client, userdata, message):
 client = mqtt.Client()
 
 # Connect to the MQTT broker
-client.connect(broker_address, broker_port)
-
+try:
+    client.connect(broker_address, broker_port)
+    print("Broker is live")
+except ConnectionRefusedError:
+    print("No broker running on machine")
+    exit(0)
 # Set the message received callback
 client.on_message = on_message
 
@@ -34,3 +38,4 @@ try:
 except KeyboardInterrupt:
     # Disconnect from the MQTT broker on Ctrl+C
     client.disconnect()
+

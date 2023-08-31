@@ -1,0 +1,10 @@
+{
+    "broker": "mosquitto",
+    "start" : "Broker/broker.py",
+    "broker_address": "localhost",
+    "broker_port": "1883",
+    "protocol" : "MQTT",
+    "database_type":"NOSQL",
+    "database_address": "mongodb://127.0.0.1:27017/",
+    "database_name":"iot_data"
+}

@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2023-08-29T16:28:40.580Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="sxzJHMSu90jmxHFb-PmD" version="21.1.2" type="device" pages="3">
+<mxfile host="Electron" modified="2023-08-31T08:46:49.904Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="-wXnBib6i8ciai0ZiHD9" version="21.1.2" type="device" pages="3">
   <diagram name="System Design" id="BC7O5tAHgVBqKriuOd3f">
-    <mxGraphModel dx="661" dy="341" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="615" dy="318" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -116,28 +116,28 @@
         <mxCell id="Nrb-KK9m-h58JXbzcD3n-61" value="Dashboard App" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="620" y="650" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="iQFnoHjpcSluBqRp5GPe-1" value="MQTT Assignment" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="iQFnoHjpcSluBqRp5GPe-1" value="MQTT Assignment" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="1200" y="162" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="iQFnoHjpcSluBqRp5GPe-2" value="Addresses" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="iQFnoHjpcSluBqRp5GPe-2" value="Addresses" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="1420" y="162" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="iQFnoHjpcSluBqRp5GPe-3" value="Manage Topics" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="iQFnoHjpcSluBqRp5GPe-3" value="Manage Topics" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="1420" y="232" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="iQFnoHjpcSluBqRp5GPe-4" value="Message filtering by Broker" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="iQFnoHjpcSluBqRp5GPe-4" value="Message filtering by Broker" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="1420" y="300" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="iQFnoHjpcSluBqRp5GPe-5" value="Message distribution to publisher" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="iQFnoHjpcSluBqRp5GPe-5" value="Message distribution to publisher" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="1420" y="370.59000000000003" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="iQFnoHjpcSluBqRp5GPe-6" value="Subscription by Client" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="iQFnoHjpcSluBqRp5GPe-6" value="Subscription by Client" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="1420" y="440" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="iQFnoHjpcSluBqRp5GPe-7" value="Publishing by Client" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="iQFnoHjpcSluBqRp5GPe-7" value="Publishing by Client" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="1420" y="510" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="iQFnoHjpcSluBqRp5GPe-8" value="Message storage handling" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="iQFnoHjpcSluBqRp5GPe-8" value="Message storage handling" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="1420" y="580" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
