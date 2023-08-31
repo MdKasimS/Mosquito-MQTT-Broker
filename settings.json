@@ -1,6 +1,7 @@
 {
     "broker": "mosquitto",
-    "start" : "Broker/broker.py",
+    "start" : "start mosquitto",
+    "process_name": "mosquitto.exe",
     "broker_address": "localhost",
     "broker_port": "1883",
     "protocol" : "MQTT",
