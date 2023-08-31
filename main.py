@@ -9,8 +9,10 @@ if __name__ == "__main__":
 
     pid = broker.initBroker(config["start"])
 
-    print(pid)
+    # Fake PID is generated
+    print(pid) 
 
+    # Actual PID using psutil
     broker_pid = broker.get_pid_by_name(config["process_name"])
 
     print(broker_pid)

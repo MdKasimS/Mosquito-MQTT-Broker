@@ -1,3 +1,4 @@
+# PS
 
 # payload structure -
 
@@ -7,36 +8,33 @@
 	"timestamp": "ISO8601_formatted_date_time" 
 }
 
-
+# ------------------ Frontend -----------------------------
 
 # app - admin-console
 
-	1. view sensors
-	2. view subscribers
-	3. view topics
+	1. manage sensors		1. add sensor
+							2. view sensors
+							3. update sensor
+							4. delete sensor
+							5. re-init sensor
+							6. exit
+
+	2. manage subscribers	1. add subscriber
+							2. view subscribers
+							3. update subscriber
+							4. delete subscriber
+							5. re-init subscriber
+							6. exit
+
+	3. manage topics		1. add topic
+							2. view topic
+							3. update topic 
+							4. delete topic
+							5. exit
 	4. exit
 
 
-# app - sensor-manager
-	
-	1. add sensor
-	2. view sensors
-	3. update sensor
-	4. delete sensor
-	5. re-init sensor
-	6. exit
-
-# app - subsriber-manager	
-	
-	1. add subscriber
-	2. view subscribers
-	3. update subscriber
-	4. delete subscriber
-	5. re-init subscriber
-	6. exit
-	
-
-
+# ---------- Backend ---------------------------------------
 
 
 # Collection - Sensors
@@ -49,8 +47,7 @@
 		"status" : true
 	}
 	
-# Collection - Subscribers
-		
+# Collection - Subscribers	
 	{
 		"id": "",
 		"type":"runtime",
@@ -60,9 +57,7 @@
 		"status": false
 	}
 	
-	
 # Collection - Sensor Data
-
 	{ 
 		"sensor_id": "unique_sensor_id",
 		"value": "<reading_value>", 
@@ -70,7 +65,6 @@
 	}
 
 # Collection - Active Publishers
-
 	{
 		"id": "",
 		"type":"default",
@@ -80,7 +74,6 @@
 	}
 	
 # Collection - Active Subscriber
-
 	{
 		"id": "",
 		"type":"default",
