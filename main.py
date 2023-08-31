@@ -7,13 +7,6 @@ from config import configuration as config
 if __name__ == "__main__":
     print(config)
 
-    # daemon_thread = threading.Thread(
-    #     target=broker.initBroker, args=(config["broker"],))
-
-    # daemon_thread.setDaemon(True)
-    # daemon_thread.start()
-
-
     pid = broker.initBroker(config["start"])
 
     print(pid)
