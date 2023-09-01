@@ -10,14 +10,15 @@ def initBroker(server):
     return process.pid
 
 def closeBroker(pid):
+    sleep(0.5)
     try:
         os.kill(pid, signal.SIGTERM)
-        print(f"Process with PID {pid} terminated.")
+        print(f"Broker terminated : {pid}")
     except OSError as e:
         print(f"Error terminating process with PID {pid}: {e}") 
 
 def get_pid_by_name(process_name):
-    sleep(5)
+    sleep(0.025)
     for process in psutil.process_iter(['pid', 'name']):
         if process_name.lower() in process.info['name'].lower():
             return process.info['pid']
