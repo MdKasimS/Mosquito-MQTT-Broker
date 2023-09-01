@@ -33,7 +33,7 @@
 							5. exit
 	4. exit
 
-# main.pay
+# main.py
 	1. Restart the broker
 	2. Exit
 

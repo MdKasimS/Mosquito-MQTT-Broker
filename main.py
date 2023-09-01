@@ -18,7 +18,12 @@ def Switch(choice):
         1: RestartBroker,
         2: Exit
     }
-    return action[choice]
+
+    if choice in action.keys():
+        return action[choice]
+    else:
+        clearScreen()
+        input("Enter the valid choice. Press enter to continue")
 
 def RestartBroker():
 
@@ -59,12 +64,19 @@ def main():
     # Actual PID using psutil
     MOSPID = broker.get_pid_by_name(config["process_name"])
     while 1:
-
-        for counter, option in enumerate(getMenuList()):
-            print(f"{counter+1}. {option}")
+        clearScreen()
+        print("Mosquitto Broker Manager")
+        print("-------------------------------")
         
-        choice = int(input("Enter your choice:"))
-
+        for counter, option in enumerate(getMenuList()):
+            
+            print(f"{counter+1}. {option}")
+        try:
+            choice = int(input("Enter your choice:"))
+        except:
+            clearScreen()
+            input("Enter the valid choice. Press enter to continue")
+            continue
         execute = Switch(choice)
 
         if choice!=len(getMenuList()):

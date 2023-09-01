@@ -6,8 +6,8 @@ from time import sleep
 
 
 def initBroker(server):
-    process = subprocess.Popen(server, shell=True)
-    return process.pid
+    subprocess.Popen(server, shell=True)
+    return "success"
 
 def closeBroker(pid):
     sleep(0.5)
