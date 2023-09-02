@@ -3,15 +3,16 @@ from time import sleep
 import broker
 from utility import clearScreen
 from utility import Exit
-from utility import reloadScript
+from utility import WelcomeNote
 from config import configuration as config
 
-#Global configuration
+# Global configuration
 MOSPID = None
 
 
 def getMenuList():
     return ["Restart Broker", "Exit"]
+
 
 def Switch(choice):
     action = {
@@ -24,6 +25,7 @@ def Switch(choice):
     else:
         clearScreen()
         input("Enter the valid choice. Press enter to continue")
+
 
 def RestartBroker():
 
@@ -47,7 +49,8 @@ def RestartBroker():
         print(f"Failed to reload the script: {e}")
 
     # reloadScript(script_file) This is not working
-    
+
+
 def Terminate():
     if MOSPID is not None:
         broker.closeBroker(MOSPID)
@@ -64,13 +67,11 @@ def main():
     # Actual PID using psutil
     MOSPID = broker.get_pid_by_name(config["process_name"])
     while 1:
-        clearScreen()
-        print("Mosquitto Broker Manager")
-        print("-------------------------------")
-        
+        WelcomeNote()
+
         for counter, option in enumerate(getMenuList()):
-            
             print(f"{counter+1}. {option}")
+
         try:
             choice = int(input("Enter your choice:"))
         except:
@@ -79,10 +80,11 @@ def main():
             continue
         execute = Switch(choice)
 
-        if choice!=len(getMenuList()):
-            execute()
-        else:
-            execute([Terminate, print, input])
+        if execute is not None:
+            if choice != len(getMenuList()):
+                execute()
+            else:
+                execute([Terminate, print, input])
         clearScreen()
 
 

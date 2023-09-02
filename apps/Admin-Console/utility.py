@@ -1,10 +1,12 @@
 import os
+import sys
 
 
 def WelcomeNote():
     clearScreen()
-    print("Mosquitto Broker Manager")
-    print("-------------------------------")
+    print(" "*5 + "|| Exalens IoT Networks ||")
+    print(" " * 7 + "Network Admin Console")
+    print("----------------------------------")
 
 
 def clearScreen():
@@ -18,12 +20,8 @@ def clearScreen():
         print(f"Failed to clear the console: {e}")
 
 
-def Exit(toDoBeforeExit):
-    if len(toDoBeforeExit) != 0:
-        for task in toDoBeforeExit:
-            task()
-    else:
-        exit(0)
+def Exit():
+    sys.exit(0)
 
 
 def reloadScript(script_file):

@@ -17,7 +17,8 @@
 							3. update sensor
 							4. delete sensor
 							5. re-init sensor
-							6. exit
+							6. turn off sensor
+							7. exit
 
 	2. manage subscribers	1. add subscriber
 							2. view subscribers

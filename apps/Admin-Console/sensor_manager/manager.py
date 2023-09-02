@@ -1,22 +1,21 @@
-from sensor_manager import manager as sensor
-from subscriber_manager import manager as subscriber
-from broker_manager import manager as broker
-
-from utility import clearScreen
-from utility import Exit
-from utility import WelcomeNote
+from .utility import clearScreen
+from .utility import WelcomeNote
+from .utility import Exit
 
 
 def getMenuList():
-    return ["Manage Sensors", "Manage Subscribers", "Manage Topics", "Exit"]
+    return ["Add Sensor", "View Sensor", "Update Sensor", "Delete Sensor", "Restart Sensor", "Turnoff Sensor", "Exit"]
 
 
 def Switch(choice):
     action = {
-        1: ManageSensor,
-        2: ManageSubscriber,
-        3: ManageTopic,
-        4: Exit
+        1: AddSensor,
+        2: ViewSensor,
+        3: UpdateSensor,
+        4: DeleteSensor,
+        5: RestartSensor,
+        6: TurnOffSensor,
+        7: Exit
     }
     if choice in action.keys():
         return action[choice]
@@ -25,22 +24,35 @@ def Switch(choice):
         input("Enter the valid choice. Press enter to continue")
 
 
-def ManageSensor():
-    sensor.Menu()
+def AddSensor():
+    pass
 
 
-def ManageSubscriber():
-    subscriber.Menu()
+def ViewSensor():
+    pass
 
 
-def ManageTopic():
-    broker.Menu()
+def UpdateSensor():
+    pass
 
 
-def main():
+def RestartSensor():
+    pass
+
+
+def DeleteSensor():
+    pass
+
+
+def TurnOffSensor():
+    pass
+
+
+def Menu():
     clearScreen()
-
-    while 1:
+    choice = ""
+    # Database()
+    while choice != len(getMenuList()):
         WelcomeNote()
 
         for counter, option in enumerate(getMenuList()):
@@ -59,7 +71,3 @@ def main():
             execute()
 
         clearScreen()
-
-
-if __name__ == "__main__":
-    main()
