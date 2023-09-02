@@ -9,13 +9,14 @@ def getMenuList():
 
 def Switch(choice):
     action = {
-        1: AddSensor,
-        2: ViewSensor,
-        3: UpdateSensor,
-        4: DeleteSensor,
-        5: RestartSensor,
-        6: TurnOffSensor,
-        7: Exit
+        1: AddSensor,    # all sensors
+        2: ViewSensor,   # active sensors
+        3: UpdateSensor,  # all sensors
+        4: DeleteSensor,  # all sensors
+        5: RestartSensor,  # all sensors
+        6: TurnOnSensor,  # all sensors
+        7: TurnOffSensor,  # active sensors
+        8: Exit
     }
     if choice in action.keys():
         return action[choice]
@@ -41,6 +42,10 @@ def RestartSensor():
 
 
 def DeleteSensor():
+    pass
+
+
+def TurnOnSensor():
     pass
 
 

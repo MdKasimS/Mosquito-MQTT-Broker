@@ -4,10 +4,8 @@ import sys
 
 def WelcomeNote():
     clearScreen()
-    print(" "*5 + "|| Exalens IoT Networks ||")
     print(" " * 7 + "Network Admin Console")
-    print("----------------------------------")
-    print("\n <Manage Subcribers> ")
+    print("________<Manage Subcribers>_______")
 
 
 def clearScreen():

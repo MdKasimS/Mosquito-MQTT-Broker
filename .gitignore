@@ -12,3 +12,4 @@ apps/admin-console/sensor_manager/__pycache__/__init__.cpython-310.pyc
 apps/admin-console/broker_manager/__pycache__/__init__.cpython-310.pyc
 apps/admin-console/broker_manager/__pycache__/manager.cpython-310.pyc
 apps/admin-console/__pycache__/utility.cpython-310.pyc
+apps/admin-console/subscriber_manager/__pycache__/utility.cpython-310.pyc

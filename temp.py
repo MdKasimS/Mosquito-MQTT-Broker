@@ -1,24 +1,33 @@
-import os
-import sys
+import threading
+import random
+import time
 
-def restart_script():
-    script_file = sys.argv[0]
+# Function to simulate a sensor and write data to a text file
+def simulate_sensor(sensor_id):
+    while True:
+        # Simulate sensor data
+        sensor_data = random.randint(0, 100)
+        
+        # Generate a unique filename for each sensor
+        filename = f"sensor_{sensor_id}.txt"
+        
+        # Write data to the text file
+        with open(filename, "a") as file:
+            file.write(f"Sensor-{sensor_id} Data: {sensor_data}\n")
+        
+        # Sleep for a while before the next reading
+        time.sleep(1)
 
-    try:
-        # Read the script's content
-        with open(script_file, 'r') as file:
-            script_content = file.read()
+# Create and start multiple threads for simulating sensors
+num_sensors = 3
+sensor_threads = []
 
-        # Execute the script's content
-        exec(script_content, globals())
-    except Exception as e:
-        print(f"Failed to reload the script: {e}")
+for i in range(num_sensors):
+    thread = threading.Thread(target=simulate_sensor, args=(i,))
+    sensor_threads.append(thread)
+    thread.start()
 
-
-# Call the restart_script function to restart the script
-restart_script()
-
-
-print("I am python script")
-input("Should I reload?")
+# Wait for all sensor threads to complete (this will never be reached)
+for thread in sensor_threads:
+    thread.join()
 

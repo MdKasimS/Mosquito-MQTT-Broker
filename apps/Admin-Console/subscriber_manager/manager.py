@@ -14,8 +14,9 @@ def Switch(choice):
         3: UpdateSubscriber,
         4: DeleteSubscriber,
         5: RestartSubscriber,
-        6: TurnOffSubscriber,
-        7: Exit
+        6: TurnOnSubscriber,
+        7: TurnOffSubscriber,
+        8: Exit
     }
     if choice in action.keys():
         return action[choice]
@@ -41,6 +42,10 @@ def RestartSubscriber():
 
 
 def DeleteSubscriber():
+    pass
+
+
+def TurnOnSubscriber():
     pass
 
 
