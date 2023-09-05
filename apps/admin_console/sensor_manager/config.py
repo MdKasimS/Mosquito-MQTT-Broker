@@ -12,5 +12,6 @@ FILEPATH = "./configuration.json"
 CONFIG = loadSettings(FILEPATH)
 CLIENT = MongoClient(CONFIG["database_address"])
 
+
 # Tests
 # print("Test : ", configuration)

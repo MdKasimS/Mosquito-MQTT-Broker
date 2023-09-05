@@ -24,3 +24,8 @@ apps/Admin-Console/database/__init__.py
 apps/Admin-Console/database/__init__.py
 apps/Admin-Console/database/__init__.py
 apps/Admin-Console/subscriber_manager/__init__.py
+apps/admin_console/sensor_manager/__pycache__/manager.cpython-310.pyc
+apps/admin_console/sensor_manager/__pycache__/manager.cpython-310.pyc
+apps/admin_console/subscriber_manager/__pycache__/manager.cpython-310.pyc
+apps/admin_console/sensor_manager/__pycache__/config.cpython-310.pyc
+apps/admin_console/subscriber_manager/__pycache__/manager.cpython-310.pyc

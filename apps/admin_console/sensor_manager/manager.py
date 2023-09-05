@@ -1,10 +1,17 @@
+#
 import random
 import time
+import json
 from .utility import clearScreen
 from .utility import WelcomeNote
 from .utility import Exit
-from admin_console.config import CONFIG as config
-from admin_console.config import CLIENT as client
+from .config import CONFIG as config
+from .config import CLIENT as client
+from pymongo import DESCENDING
+
+db = client[config["database_name"]]
+# print(db.list_collection_names())
+collection = db["sensors"]
 
 
 def getMenuList():
@@ -30,18 +37,35 @@ def Switch(choice):
 
 
 def AddSensor():
-    db = client[config["database_name"]]
-    print(db.list_collection_names())
+    
+    last_record = collection.find_one({}, sort=[('sensor_id',DESCENDING)])
 
+    nextId = last_record["sensor_id"] + 1
+    try:
+        collection.insert_one({
+            "sensor_id": nextId,
+            "type": "default",
+            "topic": "test/topic",
+            "publisher": True,
+            "subscriber": False,
+            "default": 35,
+            "status": True
+        })
+    except Exception as e:
+        print("Sensors can't be of same ID", e.with_traceback())
     input()
-    pass
 
 
 def ViewSensor():
-    pass
+    last_record = collection.find_one({}, sort=[('sensor_id',DESCENDING)])
+    
+    for key,value in last_record.items():
+        print(key, ": ", value)
+    input()
 
 
 def UpdateSensor():
+
     pass
 
 

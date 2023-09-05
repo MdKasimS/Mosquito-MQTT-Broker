@@ -1,8 +1,6 @@
 from .utility import clearScreen
 from .utility import WelcomeNote
 from .utility import Exit
-from ..config import CONFIG as config
-
 
 def getMenuList():
     return ["Add Subscriber", "View Subscriber", "Update Subscriber", "Delete Subscriber", "Restart Subscriber", "Exit"]
