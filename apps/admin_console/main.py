@@ -7,6 +7,9 @@ from utility import Exit
 from utility import WelcomeNote
 
 
+from utility import CONFIG as config
+
+
 def getMenuList():
     return ["Manage Sensors", "Manage Subscribers", "Manage Topics", "Exit"]
 
@@ -41,7 +44,14 @@ def main():
     clearScreen()
 
     while 1:
+
         WelcomeNote()
+
+        # Get database configured
+
+        # Start default sensors with default values-Threads
+
+        # Start default subscribers with default values-Threads
 
         for counter, option in enumerate(getMenuList()):
             print(f"{counter+1}.{option}")

@@ -1,5 +1,14 @@
 import os
 import sys
+import json
+
+
+def getSettings():
+    with open("../../settings.json") as file:
+        return json.load(file)
+
+
+CONFIG = getSettings()
 
 
 def WelcomeNote():

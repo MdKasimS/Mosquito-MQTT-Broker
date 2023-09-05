@@ -69,6 +69,7 @@ def main():
     while 1:
         WelcomeNote()
 
+        print("< Note: Use Admin Console For Network Management >")
         for counter, option in enumerate(getMenuList()):
             print(f"{counter+1}. {option}")
 

@@ -117,3 +117,828 @@ Sensor-2 Data: 4
 Sensor-2 Data: 88
 Sensor-2 Data: 53
 Sensor-2 Data: 52
+Sensor-2 Data: 35.7
+Sensor-2 Data: 35.0
+Sensor-2 Data: 35.79
+Sensor-2 Data: 35.68
+Sensor-2 Data: 35.27
+Sensor-2 Data: 35.14
+Sensor-2 Data: 35.21
+Sensor-2 Data: 35.49
+Sensor-2 Data: 35.1
+Sensor-2 Data: 35.57
+Sensor-2 Data: 35.18
+Sensor-2 Data: 35.87
+Sensor-2 Data: 35.6
+Sensor-2 Data: 35.01
+Sensor-2 Data: 35.22
+Sensor-2 Data: 35.98
+Sensor-2 Data: 35.43
+Sensor-2 Data: 35.85
+Sensor-2 Data: 35.4
+Sensor-2 Data: 35.32
+Sensor-2 Data: 35.39
+Sensor-2 Data: 35.45
+Sensor-2 Data: 35.32
+Sensor-2 Data: 35.06
+Sensor-2 Data: 35.57
+Sensor-2 Data: 35.75
+Sensor-2 Data: 35.93
+Sensor-2 Data: 35.08
+Sensor-2 Data: 35.81
+Sensor-2 Data: 35.16
+Sensor-2 Data: 35.54
+Sensor-2 Data: 35.65
+Sensor-2 Data: 35.68
+Sensor-2 Data: 36.0
+Sensor-2 Data: 35.68
+Sensor-2 Data: 36.0
+Sensor-2 Data: 35.37
+Sensor-2 Data: 35.15
+Sensor-2 Data: 35.94
+Sensor-2 Data: 35.61
+Sensor-2 Data: 35.03
+Sensor-2 Data: 35.46
+Sensor-2 Data: 35.88
+Sensor-2 Data: 35.06
+Sensor-2 Data: 35.76
+Sensor-2 Data: 35.33
+Sensor-2 Data: 35.12
+Sensor-2 Data: 35.51
+Sensor-2 Data: 35.64
+Sensor-2 Data: 35.94
+Sensor-2 Data:35.04
+Sensor-2 Data:35.41
+Sensor-2 Data:35.43
+Sensor-2 Data:35.49
+Sensor-2 Data:35.56
+Sensor-2 Data:35.61
+Sensor-2 Data:35.3
+Sensor-2 Data:35.43
+Sensor-2 Data:35.5
+Sensor-2 Data:35.04
+Sensor-2 Data:35.1
+Sensor-2 Data:35.48
+Sensor-2 Data:35.17
+Sensor-2 Data:35.35
+Sensor-2 Data:35.59
+Sensor-2 Data:35.94
+Sensor-2 Data:35.62
+Sensor-2 Data:35.05
+Sensor-2 Data:35.34
+Sensor-2 Data:35.51
+Sensor-2 Data:35.54
+Sensor-2 Data:35.89
+Sensor-2 Data:35.68
+Sensor-2 Data:35.71
+Sensor-2 Data:35.05
+Sensor-2 Data:35.37
+Sensor-2 Data:35.75
+Sensor-2 Data:35.26
+Sensor-2 Data:35.42
+Sensor-2 Data:35.85
+Sensor-2 Data:35.83
+Sensor-2 Data:35.94
+Sensor-2 Data:35.81
+Sensor-2 Data:35.19
+Sensor-2 Data: 35.95
+Sensor-2 Data: 35.95
+Sensor-2 Data: 35.08
+Sensor-2 Data: 35.86
+Sensor-2 Data: 35.86
+Sensor-2 Data: 35.9
+Sensor-2 Data: 35.63
+Sensor-2 Data: 36.0
+Sensor-2 Data: 35.18
+Sensor-2 Data: 35.29
+Sensor-2 Data: 35.45
+Sensor-2 Data: 35.41
+Sensor-2 Data: 35.23
+Sensor-2 Data: 35.19
+Sensor-2 Data: 35.59
+Sensor-2 Data: 35.04
+Sensor-2 Data: 35.04
+Sensor-2 Data: 35.41
+Sensor-2 Data: 35.23
+Sensor-2 Data: 35.63
+Sensor-2 Data: 35.72
+Sensor-2 Data: 35.71
+Sensor-2 Data: 35.02
+Sensor-2 Data: 35.04
+Sensor-2 Data: 35.94
+Sensor-2 Data: 35.37
+Sensor-2 Data: 35.71
+Sensor-2 Data: 35.24
+Sensor-2 Data: 35.74
+Sensor-2 Data: 35.96
+Sensor-2 Data: 35.79
+Sensor-2 Data: 35.11
+Sensor-2 Data: 35.12
+Sensor-2 Data: 35.52
+Sensor-2 Data: 35.59
+Sensor-2 Data: 35.74
+Sensor-2 Data: 35.79
+Sensor-2 Data: 35.67
+Sensor-2 Data: 35.96
+Sensor-2 Data: 35.47
+Sensor-2 Data: 35.55
+Sensor-2 Data: 35.82
+Sensor-2 Data: 35.62
+Sensor-2 Data: 35.79
+Sensor-2 Data: 35.74
+Sensor-2 Data: 35.41
+Sensor-2 Data: 35.08
+Sensor-2 Data: 35.77
+Sensor-2 Data: 35.6
+Sensor-2 Data: 35.33
+Sensor-2 Data: 35.88
+Sensor-2 Data: 35.56
+Sensor-2 Data: 35.74
+Sensor-2 Data: 35.73
+Sensor-2 Data: 35.79
+Sensor-2 Data: 35.29
+Sensor-2 Data: 35.6
+Sensor-2 Data: 35.87
+Sensor-2 Data: 35.61
+Sensor-2 Data: 35.83
+Sensor-2 Data: 35.36
+Sensor-2 Data: 35.57
+Sensor-2 Data: 35.35
+Sensor-2 Data: 35.64
+Sensor-2 Data: 35.05
+Sensor-2 Data: 35.87
+Sensor-2 Data: 35.3
+Sensor-2 Data: 35.7
+Sensor-2 Data: 35.42
+Sensor-2 Data: 35.61
+Sensor-2 Data: 35.17
+Sensor-2 Data: 35.67
+Sensor-2 Data: 35.85
+Sensor-2 Data: 35.58
+Sensor-2 Data: 35.7
+Sensor-2 Data: 35.42
+Sensor-2 Data: 35.28
+Sensor-2 Data: 35.12
+Sensor-2 Data: 35.05
+Sensor-2 Data: 35.3
+Sensor-2 Data: 35.79
+Sensor-2 Data: 35.41
+Sensor-2 Data: 35.66
+Sensor-2 Data: 35.92
+Sensor-2 Data: 35.04
+Sensor-2 Data: 35.1
+Sensor-2 Data: 35.34
+Sensor-2 Data: 35.3
+Sensor-2 Data: 35.53
+Sensor-2 Data: 35.78
+Sensor-2 Data: 35.91
+Sensor-2 Data: 35.34
+Sensor-2 Data: 35.76
+Sensor-2 Data: 35.03
+Sensor-2 Data: 35.77
+Sensor-2 Data: 35.26
+Sensor-2 Data: 35.8
+Sensor-2 Data: 35.84
+Sensor-2 Data: 35.4
+Sensor-2 Data: 35.92
+Sensor-2 Data: 35.66
+Sensor-2 Data: 35.65
+Sensor-2 Data: 35.13
+Sensor-2 Data: 35.45
+Sensor-2 Data: 35.71
+Sensor-2 Data: 35.94
+Sensor-2 Data: 35.28
+Sensor-2 Data: 35.51
+Sensor-2 Data: 35.9
+Sensor-2 Data: 35.41
+Sensor-2 Data: 35.47
+Sensor-2 Data: 35.95
+Sensor-2 Data: 35.64
+Sensor-2 Data: 35.71
+Sensor-2 Data: 35.25
+Sensor-2 Data: 35.72
+Sensor-2 Data: 35.78
+Sensor-2 Data: 36.0
+Sensor-2 Data: 35.55
+Sensor-2 Data: 35.21
+Sensor-2 Data: 35.4
+Sensor-2 Data: 35.6
+Sensor-2 Data: 35.29
+Sensor-2 Data: 35.58
+Sensor-2 Data: 35.25
+Sensor-2 Data: 35.35
+Sensor-2 Data: 35.83
+Sensor-2 Data: 35.83
+Sensor-2 Data: 35.64
+Sensor-2 Data: 35.28
+Sensor-2 Data: 35.37
+Sensor-2 Data: 35.41
+Sensor-2 Data: 35.07
+Sensor-2 Data: 35.75
+Sensor-2 Data: 35.14
+Sensor-2 Data: 35.67
+Sensor-2 Data: 35.79
+Sensor-2 Data: 35.33
+Sensor-2 Data: 35.47
+Sensor-2 Data: 35.67
+Sensor-2 Data: 35.65
+Sensor-2 Data: 35.92
+Sensor-2 Data: 35.87
+Sensor-2 Data: 35.9
+Sensor-2 Data: 35.82
+Sensor-2 Data: 35.38
+Sensor-2 Data: 35.3
+Sensor-2 Data: 35.64
+Sensor-2 Data: 35.43
+Sensor-2 Data: 35.54
+Sensor-2 Data: 35.64
+Sensor-2 Data: 35.17
+Sensor-2 Data: 35.14
+Sensor-2 Data: 35.95
+Sensor-2 Data: 35.16
+Sensor-2 Data: 35.48
+Sensor-2 Data: 35.71
+Sensor-2 Data: 35.48
+Sensor-2 Data: 35.85
+Sensor-2 Data: 35.3
+Sensor-2 Data: 35.87
+Sensor-2 Data: 35.28
+Sensor-2 Data: 35.31
+Sensor-2 Data: 35.26
+Sensor-2 Data: 35.9
+Sensor-2 Data: 35.64
+Sensor-2 Data: 35.96
+Sensor-2 Data: 35.14
+Sensor-2 Data: 35.64
+Sensor-2 Data: 35.65
+Sensor-2 Data: 35.56
+Sensor-2 Data: 35.88
+Sensor-2 Data: 35.94
+Sensor-2 Data: 35.14
+Sensor-2 Data: 35.17
+Sensor-2 Data: 35.16
+Sensor-2 Data: 35.36
+Sensor-2 Data: 35.6
+Sensor-2 Data: 35.78
+Sensor-2 Data: 35.38
+Sensor-2 Data: 35.63
+Sensor-2 Data: 35.47
+Sensor-2 Data: 35.4
+Sensor-2 Data: 35.2
+Sensor-2 Data: 35.24
+Sensor-2 Data: 35.58
+Sensor-2 Data: 35.02
+Sensor-2 Data: 35.14
+Sensor-2 Data: 35.07
+Sensor-2 Data: 35.51
+Sensor-2 Data: 35.62
+Sensor-2 Data: 35.96
+Sensor-2 Data: 35.07
+Sensor-2 Data: 35.96
+Sensor-2 Data: 35.43
+Sensor-2 Data: 35.09
+Sensor-2 Data: 36.0
+Sensor-2 Data: 35.4
+Sensor-2 Data: 35.62
+Sensor-2 Data: 35.1
+Sensor-2 Data: 35.46
+Sensor-2 Data: 35.86
+Sensor-2 Data: 35.23
+Sensor-2 Data: 35.63
+Sensor-2 Data: 35.28
+Sensor-2 Data: 35.65
+Sensor-2 Data: 35.89
+Sensor-2 Data: 35.74
+Sensor-2 Data: 35.27
+Sensor-2 Data: 35.57
+Sensor-2 Data: 35.13
+Sensor-2 Data: 36.0
+Sensor-2 Data: 35.41
+Sensor-2 Data: 35.16
+Sensor-2 Data: 35.17
+Sensor-2 Data: 35.35
+Sensor-2 Data: 35.43
+Sensor-2 Data: 35.02
+Sensor-2 Data: 35.14
+Sensor-2 Data: 35.56
+Sensor-2 Data: 35.36
+Sensor-2 Data: 35.87
+Sensor-2 Data: 35.31
+Sensor-2 Data: 35.17
+Sensor-2 Data: 35.13
+Sensor-2 Data: 35.41
+Sensor-2 Data: 35.25
+Sensor-2 Data: 35.04
+Sensor-2 Data: 35.95
+Sensor-2 Data: 35.35
+Sensor-2 Data: 35.11
+Sensor-2 Data: 35.33
+Sensor-2 Data: 35.1
+Sensor-2 Data: 35.03
+Sensor-2 Data: 36.0
+Sensor-2 Data: 35.08
+Sensor-2 Data: 35.3
+Sensor-2 Data: 35.22
+Sensor-2 Data: 35.13
+Sensor-2 Data: 35.98
+Sensor-2 Data: 35.42
+Sensor-2 Data: 35.15
+Sensor-2 Data: 35.94
+Sensor-2 Data: 35.73
+Sensor-2 Data: 35.17
+Sensor-2 Data: 35.52
+Sensor-2 Data: 35.72
+Sensor-2 Data: 35.55
+Sensor-2 Data: 35.34
+Sensor-2 Data: 35.01
+Sensor-2 Data: 35.18
+Sensor-2 Data: 35.53
+Sensor-2 Data: 36.0
+Sensor-2 Data: 35.15
+Sensor-2 Data: 35.14
+Sensor-2 Data: 35.11
+Sensor-2 Data: 35.82
+Sensor-2 Data: 35.08
+Sensor-2 Data: 35.74
+Sensor-2 Data: 35.07
+Sensor-2 Data: 35.7
+Sensor-2 Data: 35.22
+Sensor-2 Data: 35.6
+Sensor-2 Data: 35.72
+Sensor-2 Data: 35.18
+Sensor-2 Data: 35.5
+Sensor-2 Data: 35.54
+Sensor-2 Data: 35.07
+Sensor-2 Data: 35.37
+Sensor-2 Data: 35.86
+Sensor-2 Data: 35.81
+Sensor-2 Data: 35.24
+Sensor-2 Data: 35.22
+Sensor-2 Data: 35.23
+Sensor-2 Data: 35.31
+Sensor-2 Data: 35.1
+Sensor-2 Data: 35.79
+Sensor-2 Data: 35.14
+Sensor-2 Data: 35.36
+Sensor-2 Data: 35.14
+Sensor-2 Data: 35.6
+Sensor-2 Data: 35.44
+Sensor-2 Data: 35.92
+Sensor-2 Data: 35.92
+Sensor-2 Data: 35.53
+Sensor-2 Data: 35.28
+Sensor-2 Data: 35.79
+Sensor-2 Data: 35.65
+Sensor-2 Data: 35.25
+Sensor-2 Data: 35.58
+Sensor-2 Data: 35.83
+Sensor-2 Data: 35.99
+Sensor-2 Data: 35.0
+Sensor-2 Data: 35.05
+Sensor-2 Data: 35.41
+Sensor-2 Data: 35.99
+Sensor-2 Data: 35.06
+Sensor-2 Data: 35.87
+Sensor-2 Data: 35.26
+Sensor-2 Data: 35.93
+Sensor-2 Data: 35.13
+Sensor-2 Data: 35.93
+Sensor-2 Data: 35.63
+Sensor-2 Data: 35.95
+Sensor-2 Data: 35.91
+Sensor-2 Data: 35.03
+Sensor-2 Data: 35.8
+Sensor-2 Data: 35.78
+Sensor-2 Data: 35.35
+Sensor-2 Data: 35.15
+Sensor-2 Data: 35.95
+Sensor-2 Data: 35.47
+Sensor-2 Data: 35.84
+Sensor-2 Data: 35.53
+Sensor-2 Data: 35.22
+Sensor-2 Data: 35.78
+Sensor-2 Data: 35.73
+Sensor-2 Data: 35.64
+Sensor-2 Data: 35.09
+Sensor-2 Data: 35.69
+Sensor-2 Data: 35.81
+Sensor-2 Data: 35.37
+Sensor-2 Data: 35.62
+Sensor-2 Data: 35.38
+Sensor-2 Data: 35.73
+Sensor-2 Data: 35.5
+Sensor-2 Data: 35.99
+Sensor-2 Data: 35.07
+Sensor-2 Data: 35.8
+Sensor-2 Data: 35.84
+Sensor-2 Data: 35.95
+Sensor-2 Data: 35.25
+Sensor-2 Data: 35.55
+Sensor-2 Data: 35.43
+Sensor-2 Data: 35.71
+Sensor-2 Data: 35.64
+Sensor-2 Data: 35.28
+Sensor-2 Data: 35.54
+Sensor-2 Data: 35.66
+Sensor-2 Data: 35.5
+Sensor-2 Data: 35.17
+Sensor-2 Data: 35.92
+Sensor-2 Data: 35.27
+Sensor-2 Data: 35.44
+Sensor-2 Data: 35.08
+Sensor-2 Data: 35.2
+Sensor-2 Data: 35.51
+Sensor-2 Data: 35.76
+Sensor-2 Data: 35.46
+Sensor-2 Data: 35.16
+Sensor-2 Data: 35.23
+Sensor-2 Data: 35.98
+Sensor-2 Data: 35.52
+Sensor-2 Data: 35.28
+Sensor-2 Data: 35.13
+Sensor-2 Data: 35.17
+Sensor-2 Data: 35.48
+Sensor-2 Data: 35.1
+Sensor-2 Data: 35.72
+Sensor-2 Data: 35.05
+Sensor-2 Data: 35.01
+Sensor-2 Data: 35.75
+Sensor-2 Data: 35.1
+Sensor-2 Data: 35.07
+Sensor-2 Data: 35.97
+Sensor-2 Data: 35.62
+Sensor-2 Data: 35.82
+Sensor-2 Data: 35.59
+Sensor-2 Data: 35.34
+Sensor-2 Data: 35.49
+Sensor-2 Data: 35.75
+Sensor-2 Data: 35.52
+Sensor-2 Data: 35.79
+Sensor-2 Data: 35.99
+Sensor-2 Data: 35.58
+Sensor-2 Data: 35.43
+Sensor-2 Data: 35.69
+Sensor-2 Data: 35.68
+Sensor-2 Data: 35.98
+Sensor-2 Data: 35.16
+Sensor-2 Data: 35.26
+Sensor-2 Data: 35.16
+Sensor-2 Data: 35.18
+Sensor-2 Data: 35.71
+Sensor-2 Data: 35.86
+Sensor-2 Data: 35.53
+Sensor-2 Data: 35.81
+Sensor-2 Data: 35.53
+Sensor-2 Data: 35.44
+Sensor-2 Data: 35.99
+Sensor-2 Data: 35.54
+Sensor-2 Data: 35.74
+Sensor-2 Data: 35.97
+Sensor-2 Data: 35.41
+Sensor-2 Data: 35.09
+Sensor-2 Data: 35.94
+Sensor-2 Data: 35.19
+Sensor-2 Data: 35.7
+Sensor-2 Data: 35.98
+Sensor-2 Data: 36.0
+Sensor-2 Data: 35.32
+Sensor-2 Data: 35.02
+Sensor-2 Data: 35.45
+Sensor-2 Data: 35.74
+Sensor-2 Data: 35.09
+Sensor-2 Data: 35.7
+Sensor-2 Data: 35.21
+Sensor-2 Data: 35.15
+Sensor-2 Data: 35.35
+Sensor-2 Data: 35.55
+Sensor-2 Data: 35.19
+Sensor-2 Data: 35.89
+Sensor-2 Data: 35.98
+Sensor-2 Data: 35.68
+Sensor-2 Data: 35.08
+Sensor-2 Data: 35.02
+Sensor-2 Data: 35.35
+Sensor-2 Data: 35.47
+Sensor-2 Data: 35.9
+Sensor-2 Data: 35.11
+Sensor-2 Data: 35.69
+Sensor-2 Data: 35.73
+Sensor-2 Data: 35.76
+Sensor-2 Data: 35.12
+Sensor-2 Data: 35.43
+Sensor-2 Data: 35.82
+Sensor-2 Data: 35.7
+Sensor-2 Data: 35.55
+Sensor-2 Data: 35.99
+Sensor-2 Data: 35.08
+Sensor-2 Data: 35.77
+Sensor-2 Data: 35.06
+Sensor-2 Data: 35.96
+Sensor-2 Data: 35.02
+Sensor-2 Data: 35.93
+Sensor-2 Data: 35.19
+Sensor-2 Data: 35.02
+Sensor-2 Data: 35.19
+Sensor-2 Data: 35.44
+Sensor-2 Data: 35.79
+Sensor-2 Data: 35.7
+Sensor-2 Data: 35.39
+Sensor-2 Data: 35.44
+Sensor-2 Data: 35.59
+Sensor-2 Data: 35.03
+Sensor-2 Data: 35.39
+Sensor-2 Data: 35.36
+Sensor-2 Data: 35.82
+Sensor-2 Data: 35.96
+Sensor-2 Data: 35.95
+Sensor-2 Data: 35.42
+Sensor-2 Data: 35.45
+Sensor-2 Data: 35.41
+Sensor-2 Data: 35.45
+Sensor-2 Data: 35.43
+Sensor-2 Data: 35.25
+Sensor-2 Data: 35.34
+Sensor-2 Data: 35.71
+Sensor-2 Data: 35.64
+Sensor-2 Data: 35.35
+Sensor-2 Data: 35.16
+Sensor-2 Data: 35.84
+Sensor-2 Data: 35.59
+Sensor-2 Data: 35.27
+Sensor-2 Data: 35.24
+Sensor-2 Data: 35.7
+Sensor-2 Data: 35.68
+Sensor-2 Data: 35.91
+Sensor-2 Data: 35.57
+Sensor-2 Data: 35.73
+Sensor-2 Data: 35.69
+Sensor-2 Data: 35.94
+Sensor-2 Data: 35.41
+Sensor-2 Data: 35.9
+Sensor-2 Data: 35.96
+Sensor-2 Data: 35.06
+Sensor-2 Data: 35.34
+Sensor-2 Data: 35.39
+Sensor-2 Data: 35.78
+Sensor-2 Data: 35.08
+Sensor-2 Data: 35.84
+Sensor-2 Data: 35.84
+Sensor-2 Data: 35.85
+Sensor-2 Data: 35.16
+Sensor-2 Data: 35.22
+Sensor-2 Data: 35.43
+Sensor-2 Data: 35.08
+Sensor-2 Data: 35.55
+Sensor-2 Data: 35.48
+Sensor-2 Data: 35.55
+Sensor-2 Data: 35.52
+Sensor-2 Data: 35.75
+Sensor-2 Data: 35.98
+Sensor-2 Data: 35.29
+Sensor-2 Data: 35.77
+Sensor-2 Data: 35.43
+Sensor-2 Data: 35.32
+Sensor-2 Data: 35.62
+Sensor-2 Data: 35.54
+Sensor-2 Data: 35.14
+Sensor-2 Data: 35.87
+Sensor-2 Data: 35.05
+Sensor-2 Data: 35.55
+Sensor-2 Data: 35.66
+Sensor-2 Data: 35.01
+Sensor-2 Data: 35.38
+Sensor-2 Data: 35.72
+Sensor-2 Data: 35.83
+Sensor-2 Data: 35.1
+Sensor-2 Data: 35.04
+Sensor-2 Data: 35.73
+Sensor-2 Data: 35.01
+Sensor-2 Data: 35.52
+Sensor-2 Data: 35.9
+Sensor-2 Data: 35.71
+Sensor-2 Data: 35.75
+Sensor-2 Data: 35.98
+Sensor-2 Data: 35.29
+Sensor-2 Data: 35.99
+Sensor-2 Data: 35.7
+Sensor-2 Data: 35.11
+Sensor-2 Data: 35.06
+Sensor-2 Data: 35.49
+Sensor-2 Data: 35.06
+Sensor-2 Data: 35.08
+Sensor-2 Data: 35.75
+Sensor-2 Data: 35.49
+Sensor-2 Data:35.97
+Sensor-2 Data:35.04
+Sensor-2 Data:35.57
+Sensor-2 Data:35.88
+Sensor-2 Data:35.13
+Sensor-2 Data:35.37
+Sensor-2 Data:35.63
+Sensor-2 Data:35.36
+Sensor-2 Data:35.15
+Sensor-2 Data:35.16
+Sensor-2 Data:35.11
+Sensor-2 Data:35.67
+Sensor-2 Data:35.73
+Sensor-2 Data:35.87
+Sensor-2 Data:35.09
+Sensor-2 Data:35.09
+Sensor-2 Data:35.54
+Sensor-2 Data:35.82
+Sensor-2 Data:35.69
+Sensor-2 Data:35.16
+Sensor-2 Data:35.17
+Sensor-2 Data:35.34
+Sensor-2 Data:35.09
+Sensor-2 Data:35.17
+Sensor-2 Data:35.23
+Sensor-2 Data:35.28
+Sensor-2 Data:35.33
+Sensor-2 Data:35.91
+Sensor-2 Data:35.58
+Sensor-2 Data:35.9
+Sensor-2 Data:35.23
+Sensor-2 Data:35.7
+Sensor-2 Data:35.1
+Sensor-2 Data:35.04
+Sensor-2 Data:35.48
+Sensor-2 Data:35.57
+Sensor-2 Data:35.25
+Sensor-2 Data:35.94
+Sensor-2 Data:35.26
+Sensor-2 Data:35.31
+Sensor-2 Data:35.46
+Sensor-2 Data:35.89
+Sensor-2 Data:35.84
+Sensor-2 Data:35.65
+Sensor-2 Data:35.29
+Sensor-2 Data:35.8
+Sensor-2 Data:35.25
+Sensor-2 Data:35.12
+Sensor-2 Data:35.47
+Sensor-2 Data:35.47
+Sensor-2 Data:35.8
+Sensor-2 Data:35.5
+Sensor-2 Data:35.14
+Sensor-2 Data:35.94
+Sensor-2 Data:35.42
+Sensor-2 Data:35.28
+Sensor-2 Data:35.41
+Sensor-2 Data:35.25
+Sensor-2 Data:35.04
+Sensor-2 Data:35.09
+Sensor-2 Data:35.11
+Sensor-2 Data:35.99
+Sensor-2 Data:35.96
+Sensor-2 Data:35.05
+Sensor-2 Data:35.66
+Sensor-2 Data:35.24
+Sensor-2 Data:35.17
+Sensor-2 Data:35.6
+Sensor-2 Data:35.88
+Sensor-2 Data:35.75
+Sensor-2 Data:35.82
+Sensor-2 Data:35.19
+Sensor-2 Data:36.0
+Sensor-2 Data:35.13
+Sensor-2 Data:35.92
+Sensor-2 Data:35.06
+Sensor-2 Data:35.55
+Sensor-2 Data:35.93
+Sensor-2 Data:35.54
+Sensor-2 Data:35.02
+Sensor-2 Data:35.32
+Sensor-2 Data:35.78
+Sensor-2 Data:35.94
+Sensor-2 Data:35.79
+Sensor-2 Data:35.23
+Sensor-2 Data:35.95
+Sensor-2 Data:35.46
+Sensor-2 Data:35.54
+Sensor-2 Data:35.27
+Sensor-2 Data:35.82
+Sensor-2 Data:35.39
+Sensor-2 Data:35.98
+Sensor-2 Data:35.5
+Sensor-2 Data:35.19
+Sensor-2 Data:35.52
+Sensor-2 Data:35.29
+Sensor-2 Data:35.13
+Sensor-2 Data:35.59
+Sensor-2 Data:35.14
+Sensor-2 Data:35.81
+Sensor-2 Data:35.38
+Sensor-2 Data:35.59
+Sensor-2 Data:35.08
+Sensor-2 Data:35.7
+Sensor-2 Data:35.85
+Sensor-2 Data:35.37
+Sensor-2 Data:35.82
+Sensor-2 Data:35.91
+Sensor-2 Data:35.16
+Sensor-2 Data:35.35
+Sensor-2 Data:35.36
+Sensor-2 Data:35.19
+Sensor-2 Data:35.18
+Sensor-2 Data:35.61
+Sensor-2 Data:35.27
+Sensor-2 Data:35.71
+Sensor-2 Data:35.81
+Sensor-2 Data:35.39
+Sensor-2 Data:35.65
+Sensor-2 Data:35.26
+Sensor-2 Data:35.16
+Sensor-2 Data:35.82
+Sensor-2 Data:35.76
+Sensor-2 Data:35.58
+Sensor-2 Data:35.42
+Sensor-2 Data:35.48
+Sensor-2 Data:35.75
+Sensor-2 Data:35.19
+Sensor-2 Data:35.22
+Sensor-2 Data:35.48
+Sensor-2 Data:35.7
+Sensor-2 Data:35.24
+Sensor-2 Data:35.3
+Sensor-2 Data:35.87
+Sensor-2 Data:35.53
+Sensor-2 Data:35.89
+Sensor-2 Data:35.58
+Sensor-2 Data:35.86
+Sensor-2 Data:35.41
+Sensor-2 Data:35.68
+Sensor-2 Data:35.43
+Sensor-2 Data:35.92
+Sensor-2 Data:35.42
+Sensor-2 Data:35.54
+Sensor-2 Data:35.47
+Sensor-2 Data:35.78
+Sensor-2 Data:35.45
+Sensor-2 Data:35.7
+Sensor-2 Data:35.54
+Sensor-2 Data:35.42
+Sensor-2 Data:35.15
+Sensor-2 Data:35.04
+Sensor-2 Data:35.25
+Sensor-2 Data:35.8
+Sensor-2 Data:35.68
+Sensor-2 Data:35.52
+Sensor-2 Data:35.37
+Sensor-2 Data:35.02
+Sensor-2 Data:35.17
+Sensor-2 Data:35.63
+Sensor-2 Data:35.7
+Sensor-2 Data:35.85
+Sensor-2 Data:35.19
+Sensor-2 Data:35.56
+Sensor-2 Data:35.92
+Sensor-2 Data:35.21
+Sensor-2 Data:35.42
+Sensor-2 Data:35.56
+Sensor-2 Data:35.59
+Sensor-2 Data:35.31
+Sensor-2 Data:35.09
+Sensor-2 Data:35.78
+Sensor-2 Data:35.67
+Sensor-2 Data:35.72
+Sensor-2 Data:35.45
+Sensor-2 Data:35.21
+Sensor-2 Data:35.45
+Sensor-2 Data:35.77
+Sensor-2 Data:35.04
+Sensor-2 Data:35.29
+Sensor-2 Data:35.95
+Sensor-2 Data:35.32
+Sensor-2 Data:35.33
+Sensor-2 Data:35.98
+Sensor-2 Data:35.41
+Sensor-2 Data:35.33
+Sensor-2 Data:35.47
+Sensor-2 Data:35.51
+Sensor-2 Data:35.2
+Sensor-2 Data:35.68
+Sensor-2 Data:35.92
+Sensor-2 Data:35.9
+Sensor-2 Data:35.99
+Sensor-2 Data:35.37
+Sensor-2 Data:35.08
+Sensor-2 Data:35.45
+Sensor-2 Data:35.08
+Sensor-2 Data:35.16
+Sensor-2 Data:35.6
+Sensor-2 Data:35.01
+Sensor-2 Data:35.04
+Sensor-2 Data:35.19
+Sensor-2 Data:35.16
+Sensor-2 Data:35.0
+Sensor-2 Data:35.83
+Sensor-2 Data:35.0
+Sensor-2 Data:35.66
+Sensor-2 Data:35.27
+Sensor-2 Data:35.34
+Sensor-2 Data:35.23
+Sensor-2 Data:35.24
+Sensor-2 Data:35.69
+Sensor-2 Data:35.46
+Sensor-2 Data:35.84

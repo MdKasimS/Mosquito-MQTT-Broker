@@ -1,6 +1,7 @@
 from .utility import clearScreen
 from .utility import WelcomeNote
 from .utility import Exit
+from ..config import CONFIG as config
 
 
 def getMenuList():

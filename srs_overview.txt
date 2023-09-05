@@ -47,7 +47,8 @@
 		"type":"default",
 		"topic":"",
 		"publisher": true,
-		"subscriber": false
+		"subscriber": false,
+		"default": 35,
 		"status" : true
 	}
 	
@@ -58,6 +59,7 @@
 		"topic":"",
 		"publisher": flase,
 		"subscriber": true,
+		"default": 35,
 		"status": false
 	}
 	
