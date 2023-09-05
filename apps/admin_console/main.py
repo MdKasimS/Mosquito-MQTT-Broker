@@ -5,9 +5,8 @@ from broker_manager import manager as broker
 from utility import clearScreen
 from utility import Exit
 from utility import WelcomeNote
-
-
 from utility import CONFIG as config
+
 
 
 def getMenuList():
@@ -58,7 +57,7 @@ def main():
 
         try:
             choice = int(input("Enter your choice:"))
-        except:
+        except Exception as e:
             clearScreen()
             input("Enter the valid choice. Press enter  to continue")
             continue

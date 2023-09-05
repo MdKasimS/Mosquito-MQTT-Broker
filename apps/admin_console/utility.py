@@ -3,6 +3,7 @@ import sys
 import json
 
 
+
 def getSettings():
     with open("../../settings.json") as file:
         return json.load(file)
@@ -30,6 +31,7 @@ def clearScreen():
 
 
 def Exit():
+    # client.close()
     sys.exit(0)
 
 

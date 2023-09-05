@@ -29,3 +29,7 @@ apps/admin_console/sensor_manager/__pycache__/manager.cpython-310.pyc
 apps/admin_console/subscriber_manager/__pycache__/manager.cpython-310.pyc
 apps/admin_console/sensor_manager/__pycache__/config.cpython-310.pyc
 apps/admin_console/subscriber_manager/__pycache__/manager.cpython-310.pyc
+apps/admin_console/__pycache__/utility.cpython-310.pyc
+apps/admin_console/sensor_manager/__pycache__/manager.cpython-310.pyc
+apps/admin_console/sensor_manager/__pycache__/utility.cpython-310.pyc
+apps/admin_console/sensor_manager/__pycache__/manager.cpython-310.pyc

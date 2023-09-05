@@ -1,7 +1,5 @@
-#
 import random
 import time
-import json
 from .utility import clearScreen
 from .utility import WelcomeNote
 from .utility import Exit
@@ -10,13 +8,11 @@ from .config import CLIENT as client
 from pymongo import DESCENDING
 
 db = client[config["database_name"]]
-# print(db.list_collection_names())
 collection = db["sensors"]
 
 
 def getMenuList():
     return ["Add Sensor", "View Sensor", "Update Sensor", "Delete Sensor", "Restart Sensor", "Turnoff Sensor", "Exit"]
-
 
 def Switch(choice):
     action = {
@@ -35,12 +31,12 @@ def Switch(choice):
         clearScreen()
         input("Enter the valid choice. Press enter to continue")
 
-
 def AddSensor():
     
     last_record = collection.find_one({}, sort=[('sensor_id',DESCENDING)])
 
     nextId = last_record["sensor_id"] + 1
+   
     try:
         collection.insert_one({
             "sensor_id": nextId,
@@ -52,38 +48,38 @@ def AddSensor():
             "status": True
         })
     except Exception as e:
-        print("Sensors can't be of same ID", e.with_traceback())
-    input()
+        clearScreen()
+        key = 0
+        value = 0
+        input(f"Sensors can't be of same details -> {key}:{value}\nPress enter to continue...")
+        return
 
+    clearScreen()
+    input("Sensor Has Been Successfully Added!\nPress Enter To Continue")
+    # clearScreen()
 
 def ViewSensor():
+    clearScreen()
     last_record = collection.find_one({}, sort=[('sensor_id',DESCENDING)])
     
     for key,value in last_record.items():
         print(key, ": ", value)
-    input()
-
+    input("\nPress Enter To Continue...")
 
 def UpdateSensor():
-
     pass
-
 
 def RestartSensor():
     pass
 
-
 def DeleteSensor():
     pass
-
 
 def TurnOnSensor():
     pass
 
-
 def TurnOffSensor():
     pass
-
 
 def simulate_sensor(sensor_id):
     while True:
@@ -100,36 +96,36 @@ def simulate_sensor(sensor_id):
         # Sleep for a while before the next reading
         time.sleep(1)
 
-
 def getActiveSensors():
     return []  # active sensor list from database
 
-
 def filter(criteria):
     pass
-
 
 def Menu():
     clearScreen()
     choice = ""
     # Database()
+    if client.server_info():
+        while choice != len(getMenuList()):
+            WelcomeNote()
 
-    while choice != len(getMenuList()):
-        WelcomeNote()
+            for counter, option in enumerate(getMenuList()):
+                print(f"{counter+1}.{option}")
 
-        for counter, option in enumerate(getMenuList()):
-            print(f"{counter+1}.{option}")
+            try:
+                choice = int(input("Enter your choice:"))
+            except:
+                clearScreen()
+                input("Enter the valid choice. Press enter  to  continue")
+                continue
 
-        try:
-            choice = int(input("Enter your choice:"))
-        except:
-            clearScreen()
-            input("Enter the valid choice. Press enter  to continue")
-            continue
+            execute = Switch(choice)
 
-        execute = Switch(choice)
+            if execute is not None:
+                execute()
 
-        if execute is not None:
-            execute()
-
+    else:
         clearScreen()
+        input("Server Disconnected. Please Press Enter To Continue..")
+        return
