@@ -35,6 +35,8 @@ def simulate_sensor(sensor):
     broker_address = config["broker_address"] #"localhost"
     broker_port = config["broker_port"] #1883
 
+    print("")
+
     # Create a MQTT client instance
     client = mqtt.Client()
 
@@ -63,7 +65,7 @@ def simulate_sensor(sensor):
 
         # Publish data
         try:
-            client.publish(topic, sensor_data)
+            client.publish(topic, str(sensor_data))
         except Exception as e:
             client.disconnect()
         

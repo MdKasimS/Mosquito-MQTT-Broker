@@ -138,7 +138,7 @@ def acceptSensorData(sensor):
             sensor["type"] = "default"
 
 
-        # Get sensor topic
+        # Get Sensor topic
         print("\nChoose Publish At :\n1. test\n2. prod")
         channel = input("Enter your choice : ")
         value = input("Enter your topic name : ")
@@ -167,7 +167,6 @@ def acceptSensorData(sensor):
         input(f"Sensors can't be of same details -> {key}:{value}\nPress enter tocontinue...")
         return None
     
-
 def Menu():
     clearScreen()
     choice = ""

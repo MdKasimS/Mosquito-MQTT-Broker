@@ -95,7 +95,7 @@ def acceptSubscriberData(subscriber):
             subscriber["type"] = "default"
 
 
-        # Get sensor topic
+        # Get Subscriber topic
         print("\nChoose To Subscribe At :\n1. test\n2. prod")
         channel = input("Enter your choice : ")
         value = input("Enter your topic name : ")
@@ -112,7 +112,7 @@ def acceptSubscriberData(subscriber):
         # value = float(input("Enter default sensor value : "))
         # sensor["default"] = value
         
-        # Set sensor
+        # Set subscriber
         subscriber["status"] = True
             
         return subscriber
@@ -127,26 +127,20 @@ def acceptSubscriberData(subscriber):
 def ViewSubscriber():
     pass
 
-
 def UpdateSubscriber():
     pass
-
 
 def RestartSubscriber():
     pass
 
-
 def DeleteSubscriber():
     pass
-
 
 def TurnOnSubscriber():
     pass
 
-
 def TurnOffSubscriber():
     pass
-
 
 def Menu(client):
     clearScreen()
