@@ -1,11 +1,16 @@
 import random
 import time
+
+from bson import ObjectId
 from .utility import clearScreen
 from .utility import WelcomeNote
 from .utility import Exit
-from .config import CONFIG as config
-from .config import CLIENT as client
+from .config import CONFIG as config, CLIENT as client
 from pymongo import DESCENDING
+from pymongo.errors import BulkWriteError
+
+from database import crud
+
 
 db = client[config["database_name"]]
 collection = db["sensors"]
@@ -34,25 +39,62 @@ def Switch(choice):
 def AddSensor():
     
     last_record = collection.find_one({}, sort=[('sensor_id',DESCENDING)])
-
     nextId = last_record["sensor_id"] + 1
-   
-    try:
-        collection.insert_one({
-            "sensor_id": nextId,
-            "type": "default",
-            "topic": "test/topic",
-            "publisher": True,
-            "subscriber": False,
-            "default": 35,
-            "status": True
-        })
-    except Exception as e:
-        clearScreen()
-        key = 0
-        value = 0
-        input(f"Sensors can't be of same details -> {key}:{value}\nPress enter to continue...")
-        return
+    
+    choice = 0
+    sensor={
+        "sensor_id" : nextId,
+        # "publisher" : True,
+        # "subscriber" : False,
+        # "status": True
+    }
+    
+    while choice!= 3:
+        WelcomeNote()
+        print("1. Add One\n2. Add Multiple\n3. Go Back")
+        
+        try:
+            choice = int(input("Enter your choice:"))
+            clearScreen()
+            if choice == 3:
+                return
+        except:
+            clearScreen()
+            input("Enter the valid choice. Press enter to continue")
+            continue
+
+        if choice == 1:
+            sensor = acceptSensorData(sensor)
+            if sensor is not None:
+                collection.insert_one(sensor)
+            else:
+                clearScreen()
+                input("Unexpected Error Occured. Press enter to continue...")
+                return
+        else:
+            flag = True
+            records = []
+            while flag is True:
+                WelcomeNote()
+                try:
+                    num = input("Enter number of records :")
+                    flag = False
+                except Exception as e:
+                    clearScreen()
+                    input("Please Enter Integre Value >0. Press Enter To Continue...")
+                    continue
+                num = int(num)
+                for i in range(num):
+                    sensor = acceptSensorData(sensor)
+                    if sensor is not None:
+                        records.append(sensor)
+                    else:
+                        input("Unexepected Error Occured...")
+                
+                if len(records)>0:
+                    collection.insert_many(records) #Not Working For BULK Writes 
+
+
 
     clearScreen()
     input("Sensor Has Been Successfully Added!\nPress Enter To Continue")
@@ -99,6 +141,52 @@ def simulate_sensor(sensor_id):
 def getActiveSensors():
     return []  # active sensor list from database
 
+def acceptSensorData(sensor):
+    # sensor["_id"] = ObjectId()
+    type = ["Default", "Runtime"]
+    channels = ["test/", "prod/"]
+    try:  
+        # Get Sensor Type
+        print("Choose Type:\n1. Default\n2. Runtime\n")
+        value = input("Enter Your Choice : ")
+        
+        if value in [1,2]:
+            sensor["type"] = type[value]
+        else:
+            sensor["type"] = "default"
+
+
+        # Get sensor topic
+        print("Choose Publish At :\n\
+              1. test\n\
+              2. prod")
+        channel = input("Enter your choice : ")
+        value = input("Enter your topic name : ")
+
+        if channel == "2":
+            sensor["topic"] = channels[1] + value
+        else:
+            sensor["topic"] = "test/" + value
+
+        sensor["publisher"] = True
+        sensor["subscriber"] = False,
+
+        # Get default sensor value
+        value = float(input("Enter default sensor value : "))
+        sensor["default"] = value
+        
+        # Set sensor
+        sensor["status"] = True
+            
+        return sensor
+
+    except Exception as e:
+        clearScreen()
+        key = 0
+        value = 0
+        input(f"Sensors can't be of same details -> {key}:{value}\nPress enter tocontinue...")
+        return None
+    
 def filter(criteria):
     pass
 

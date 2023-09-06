@@ -2,3 +2,6 @@
 # Initial values will be of default clients
 PUBTHREADPOOL = []
 SUBTHREADPOOL = []
+
+ACTIVE_SENSORS = []
+ACTIVE_SUBSCRIBERS = []

@@ -9,7 +9,7 @@ def getSettings():
         return json.load(file)
 
 
-CONFIG = getSettings()
+CONFIGURATION = getSettings()
 
 
 def WelcomeNote():
@@ -32,6 +32,9 @@ def clearScreen():
 
 def Exit():
     # client.close()
+    clearScreen()
+    input("-----<Application Exited>-----\nPress Enter To Exit...")
+    clearScreen()
     sys.exit(0)
 
 

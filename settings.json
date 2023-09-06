@@ -3,7 +3,7 @@
     "start" : "start mosquitto",
     "process_name": "mosquitto.exe",
     "broker_address": "localhost",
-    "broker_port": "1883",
+    "broker_port": 1883,
     "protocol" : "MQTT",
     "database_type":"NOSQL",
     "database_address": "mongodb://127.0.0.1:27017/",
