@@ -6,9 +6,10 @@ from utility import Exit
 from utility import WelcomeNote
 from config import configuration as config
 
-# Global configuration
+# Global data : Start
 MOSPID = None
 
+# Global data : End
 
 def getMenuList():
     return ["Restart Broker", "Exit"]
@@ -62,6 +63,7 @@ def Terminate():
 def main():
     clearScreen()
     broker.initBroker(config["start"])
+    sleep(2)
 
     global MOSPID
     # Actual PID using psutil

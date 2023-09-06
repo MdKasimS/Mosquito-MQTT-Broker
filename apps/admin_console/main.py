@@ -1,6 +1,7 @@
 import random
 import threading
 import time
+import datetime
 import paho.mqtt.client as mqtt
 
 
@@ -15,7 +16,7 @@ from utility import CONFIGURATION as config
 from config import CLIENT as client
 from database import data 
 
-# Global data
+# Global data : Start
 THREADCONTROL = None
 
 db = client["iot_data"]
@@ -25,6 +26,8 @@ pubPool = data.PUBTHREADPOOL
 subPool = data.SUBTHREADPOOL
 active_sensors = data.ACTIVE_SENSORS
 active_subscriber = data.ACTIVE_SUBSCRIBERS
+
+# Global data : End 
 
 def simulate_sensor(sensor):
 
@@ -45,24 +48,31 @@ def simulate_sensor(sensor):
     while THREADCONTROL is None:
 
         # Simulate sensor data
-        sensor_data = sensor["default"] + round(random.randint(0, 100)/100 % 30, 3)
+        sensor_value = sensor["default"] + round(random.randint(0, 100)/100 % 30, 3)
 
         # Generate a unique filename for each sensor
         filename = f"sensor_{sensor['sensor_id']}.txt"
+
+        # Prepare payload
+        sensor_data = { 
+            "sensor_id" : sensor["sensor_id"],
+            "value" : sensor_value,
+            "timestamp" : datetime.datetime.now().isoformat()
+        }
 
         #publish data
         try:
             client.publish(topic, sensor_data)
         except Exception as e:
             client.disconnect()
-
-        # Write data to the text file
+        
+        # Write data to the text file [FOR TESTING]
         with open(filename, "a") as file:
-            file.write(f"Sensor-{sensor['sensor_id']} Data: {sensor_data}\n")
+            # file.write(f"Sensor-{sensor['sensor_id']} Data: {sensor_data}\n")
+            file.write(f"{sensor_data}\n")
 
             # Sleep for a while before the next reading
             time.sleep(1)
-
 
 
 def getMenuList():
@@ -110,10 +120,10 @@ def main():
                 active_sensors.append(document)
 
 
-        # Start default sensors with default values-Threads
-        # Create and start multiple threads for simulating sensors
-        for i in active_sensors:
-            thread = threading.Thread(target=simulate_sensor, args=(i,))
+        # Start default sensors with default values-Threads.
+        # Create and start multiple threads for simulating sensors.
+        for sensor in active_sensors:
+            thread = threading.Thread(target=simulate_sensor, args=(sensor,))
             pubPool.append(thread)
             thread.start()
         

@@ -10,7 +10,7 @@ from pymongo import DESCENDING
 from pymongo.errors import BulkWriteError
 
 from database import crud
-
+from database import data
 
 db = client[config["database_name"]]
 collection = db["sensors"]
@@ -42,12 +42,9 @@ def AddSensor():
     nextId = last_record["sensor_id"] + 1
     
     choice = 0
-    sensor={
-        "sensor_id" : nextId,
-        # "publisher" : True,
-        # "subscriber" : False,
-        # "status": True
-    }
+    sensor = {
+        "sensor_id" : nextId
+        }
     
     while choice!= 3:
         WelcomeNote()
@@ -123,28 +120,13 @@ def TurnOnSensor():
 def TurnOffSensor():
     pass
 
-def simulate_sensor(sensor_id):
-    while True:
-        # Simulate sensor data
-        sensor_data = 35 + random.randint(0, 100)/100 % 30
-
-        # Generate a unique filename for each sensor
-        filename = f"sensor_{sensor_id}.txt"
-
-        # Write data to the text file
-        with open(filename, "a") as file:
-            file.write(f"Sensor-{sensor_id} Data: {sensor_data}\n")
-
-        # Sleep for a while before the next reading
-        time.sleep(1)
-
-def getActiveSensors():
-    return []  # active sensor list from database
+def getSensors():
+    return data.ACTIVE_SENSORS
 
 def acceptSensorData(sensor):
-    # sensor["_id"] = ObjectId()
     type = ["Default", "Runtime"]
     channels = ["test/", "prod/"]
+
     try:  
         # Get Sensor Type
         print("Choose Type:\n1. Default\n2. Runtime\n")
@@ -157,9 +139,7 @@ def acceptSensorData(sensor):
 
 
         # Get sensor topic
-        print("Choose Publish At :\n\
-              1. test\n\
-              2. prod")
+        print("Choose Publish At :\n1. test\n2. prod")
         channel = input("Enter your choice : ")
         value = input("Enter your topic name : ")
 
@@ -187,13 +167,12 @@ def acceptSensorData(sensor):
         input(f"Sensors can't be of same details -> {key}:{value}\nPress enter tocontinue...")
         return None
     
-def filter(criteria):
-    pass
 
 def Menu():
     clearScreen()
     choice = ""
     # Database()
+    
     if client.server_info():
         while choice != len(getMenuList()):
             WelcomeNote()
