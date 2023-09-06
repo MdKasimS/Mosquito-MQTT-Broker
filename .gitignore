@@ -62,3 +62,5 @@ apps/admin_console/sensor_20.txt
 apps/admin_console/sensor_21.txt
 apps/admin_console/sensor_22.txt
 apps/admin_console/sensor_manager/__pycache__/manager.cpython-310.pyc
+apps/admin_console/subscriber_manager/__pycache__/manager.cpython-310.pyc
+apps/admin_console/sensor_manager/__pycache__/manager.cpython-310.pyc

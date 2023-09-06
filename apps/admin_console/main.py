@@ -48,7 +48,8 @@ def simulate_sensor(sensor):
     while THREADCONTROL is None:
 
         # Simulate sensor data
-        sensor_value = sensor["default"] + round(random.randint(0, 100)/100 % 30, 3)
+        sensor_value = sensor["default"] + (random.randint(0, 100) % 50)/100
+        sensor_value = round(sensor_value, 3)
 
         # Generate a unique filename for each sensor
         filename = f"sensor_{sensor['sensor_id']}.txt"
@@ -60,7 +61,7 @@ def simulate_sensor(sensor):
             "timestamp" : datetime.datetime.now().isoformat()
         }
 
-        #publish data
+        # Publish data
         try:
             client.publish(topic, sensor_data)
         except Exception as e:
@@ -98,7 +99,7 @@ def ManageSensor():
 
 
 def ManageSubscriber():
-    subscriber.Menu()
+    subscriber.Menu(client)
 
 
 def ManageTopic():

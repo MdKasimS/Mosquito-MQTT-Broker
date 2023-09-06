@@ -12,7 +12,7 @@ def loadSettings(filePath):
 # Constants
 FILEPATH = "./configuration.json"
 CONFIG = loadSettings(FILEPATH)
-CLIENT = MongoClient(CONFIG["database_address"])
+# CLIENT = MongoClient(CONFIG["database_address"])
 
 
 def connectDatabase():

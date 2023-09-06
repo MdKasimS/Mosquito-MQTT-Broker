@@ -1,7 +1,7 @@
 import random
 import time
-
 from bson import ObjectId
+
 from .utility import clearScreen
 from .utility import WelcomeNote
 from .utility import Exit
@@ -139,7 +139,7 @@ def acceptSensorData(sensor):
 
 
         # Get sensor topic
-        print("Choose Publish At :\n1. test\n2. prod")
+        print("\nChoose Publish At :\n1. test\n2. prod")
         channel = input("Enter your choice : ")
         value = input("Enter your topic name : ")
 
