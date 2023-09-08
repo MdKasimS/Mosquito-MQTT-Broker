@@ -28,22 +28,12 @@ pubPool = data.PUBTHREADPOOL
 subPool = data.SUBTHREADPOOL
 active_sensors = data.ACTIVE_SENSORS
 active_subscribers = data.ACTIVE_SUBSCRIBERS
+active_topics = data.ACTIVE_TOPICS
 
 # Global data : End 
 
 def simulate_sensor(thread,sensor):
 
-    print(f"Thread starting.... for {sensor}")
-    
-    # Update Topics
-    topic = {
-        "sensor_id" : sensor["sensor_id"],
-		"topic" : sensor["topic"],
-		"threadId" : thread, #thread.ident,
-		"timestamp" : datetime.datetime.now().isoformat()
-    }
-
-    topics.insert_one(topic)
          
     # Define the MQTT broker details
     broker_address = setting["broker_address"] 
@@ -61,7 +51,16 @@ def simulate_sensor(thread,sensor):
 
     # Publish a message to a topic
     topic = sensor["topic"]
-    
+
+    # Update Topics
+    topic = {
+        "sensor_id" : sensor["sensor_id"],
+		"topic" : sensor["topic"],
+		"threadId" : pubPool[thread].ident, #thread.ident,
+		"timestamp" : datetime.datetime.now().isoformat()
+    }
+    topics.insert_one(topic)
+
     while THREADCONTROL is None:
 
         # Simulate sensor data
@@ -93,6 +92,11 @@ def simulate_sensor(thread,sensor):
             time.sleep(1)
 
 
+def subscribe():
+
+    pass
+
+
 def redis():
 
     redis_queue = queue.Queue()
@@ -108,7 +112,7 @@ def redis():
 
 
 def getMenuList():
-    return ["Manage Sensors", "Manage Subscribers", "Manage Topics", "Re-Start All Clients","StopAllThreads","Exit"]
+    return ["Manage Sensors", "Manage Subscribers", "Manage Topics", "Re-Start All Clients","Stop All Threads","Exit"]
 
 
 def Switch(choice):
@@ -117,7 +121,7 @@ def Switch(choice):
         2: ManageSubscriber,
         3: ManageTopic,
         4: RestartClients,
-        5: StopAllThreads,
+        5: StopAllClients,
         6: Exit
     }
     if choice in action.keys():
@@ -138,8 +142,10 @@ def ManageSubscriber():
 def ManageTopic():
     broker.Menu()
 
-def StartThreads(active_clients):
+def StartClients(active_clients):
 
+    global THREADCONTROL
+    THREADCONTROL = None
     # Create and start multiple threads for simulating sensors.
     for counter, mqtt_client in enumerate(active_clients):
         thread = threading.Thread(target=simulate_sensor, args=(counter, mqtt_client))
@@ -148,7 +154,7 @@ def StartThreads(active_clients):
         else:
             subPool.append(thread)
             # input("This is subscriber")
-
+        
         thread.start()
 
 def StartRedis():
@@ -159,43 +165,57 @@ def StartRedis():
     for i in pubPool:
         input(i)
 
-def StopAllThreads():
+def StopAllClients():
     global THREADCONTROL
+    global topics
     THREADCONTROL = 1
+    topics.delete_many({})
 
+    # clearScreen()
+    # input("All clients have been restarted. Press enter to continue...")
 
 def RestartClients():
-    global active_sensors
-    global THREADCONTROL
-
-    StopAllThreads()
-    THREADCONTROL = None
-    StartThreads(active_sensors)
+    
+    StopAllClients()
+    StartClients(active_sensors)
     # StartRedis()
     # StartThreads(active_subscribers)
 
+    clearScreen()
+    input("All clients have been restarted. Press enter to continue...")
 
 def main():
     clearScreen()
 
     # Load database-sensors data
     cursor = sensors.find()
-    for document in cursor:
-        if document["status"] == True:
-            active_sensors.append(document)
+    for mqtt_client in cursor:
+        if mqtt_client["status"] == True:
+            active_sensors.append(mqtt_client)
+
+     # Start default sensors with default values-Threads.
+    StartClients(active_sensors)
+
+    # Load database-topics data
+    cursor = topics.find()
+    topicList = []
+    for i in cursor:
+        topicList.append(i['topic'])
+
+    # Start redis
+    # StartRedis() 
+
+    
+  
 
     # Load database-subscribers data
     cursor = subscribers.find()
-    for document in cursor:
-        if document["status"] == True: # And if its topic is in topic collection
-            active_subscribers.append(document)
-
-    # Start default sensors with default values-Threads.
-    StartThreads(active_sensors)
-
-    # Start redis
-    # StartRedis()        
-
+    for mqtt_client in cursor:
+        if mqtt_client["status"] == True and mqtt_client["topic"] in topicList: # And if its topic is in topic collection
+            active_subscribers.append(mqtt_client)
+            # input("We got a subscriber...")
+    
+       
     # Start default subscribers with default values-Threads        
 
     while True:
@@ -209,8 +229,7 @@ def main():
         try:
             choice = int(input("Enter your choice: "))
             if choice == len(getMenuList()):
-                global THREADCONTROL
-                THREADCONTROL= 1 
+                StopAllClients()
         except Exception as e:
             clearScreen()
             input("Enter the valid choice. Press enter  to continue")

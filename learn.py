@@ -179,6 +179,6 @@ def threadControl():
 
 # threadBasic()
 # threadIdents()
-# threadPIDs()
+threadPIDs()
 # threadControl()
-codeAfterThread()
+# codeAfterThread()

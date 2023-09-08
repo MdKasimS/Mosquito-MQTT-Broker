@@ -42,7 +42,7 @@ def AddSubscriber():
 	# 	"default": 35,
 	# 	"status": True
 	# }
-    print(collection)
+    # print(collection)
     
 
     last_record = collection.find_one({}, sort=[('subscriber_id',DESCENDING)])

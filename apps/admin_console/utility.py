@@ -8,7 +8,6 @@ def WelcomeNote():
     print(" "*5 + "|| Exalens IoT Networks ||")
     print(" " * 7 + "Network Admin Console")
     print("----------------------------------")
-    print("< Note: Use Admin Console For Network Management >")
 
 
 

@@ -2,6 +2,8 @@ import random
 import time
 from bson import ObjectId
 
+from prettytable import PrettyTable
+
 from .utility import clearScreen
 from .utility import WelcomeNote
 from .utility import Exit
@@ -11,6 +13,7 @@ from pymongo.errors import BulkWriteError
 
 from database import crud
 from database import data
+
 
 db = client[config["database_name"]]
 collection = db["sensors"]
@@ -101,10 +104,37 @@ def AddSensor():
 
 def ViewSensor():
     clearScreen()
-    last_record = collection.find_one({}, sort=[('sensor_id',DESCENDING)])
     
-    for key,value in last_record.items():
-        print(key, ": ", value)
+    tableColumnHeadings = []
+            # "_id","sensor_id","type","topic","publisher","subscriber","default","status"
+
+    for i in data.ACTIVE_SENSORS[0].keys():
+        tableColumnHeadings.append(i)    
+
+    # tableColumnHeadings.append("Sr_No")
+    table = PrettyTable(tableColumnHeadings)
+
+
+    # for row in data.ACTIVE_SENSORS:
+    #     table.add_row([row["_id"],row["sensor_id"],row["type"],row["topic"],row["publisher"], row["subscriber"], row["default"], row["status"]])
+
+    for row in data.ACTIVE_SENSORS:
+        table.add_row([
+            row[tableColumnHeadings[0]],
+            row[tableColumnHeadings[1]],
+            row[tableColumnHeadings[2]],
+            row[tableColumnHeadings[3]],
+            row[tableColumnHeadings[4]],
+            row[tableColumnHeadings[5]],
+            row[tableColumnHeadings[6]],
+            row[tableColumnHeadings[7]]])
+    
+    for i in tableColumnHeadings:
+        table.align[i] = "c"
+
+    table.align["topic"] = "l"
+    print(table)
+
     input("\nPress Enter To Continue...")
 
 def UpdateSensor():

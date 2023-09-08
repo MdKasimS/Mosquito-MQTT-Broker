@@ -5,6 +5,8 @@ def WelcomeNote():
     clearScreen()
     print("Mosquitto Broker Manager")
     print("-------------------------------")
+    print("< Note: Use Admin Console For Network Management >")
+
 
 
 def clearScreen():
