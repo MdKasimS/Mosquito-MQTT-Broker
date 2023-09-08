@@ -4,13 +4,17 @@ from .utility import Exit
 
 from pymongo import DESCENDING
 
+from database import data
+
+from prettytable import PrettyTable
+
 
 CLIENT = None
 db = None
 collection = None
 
 def getMenuList():
-    return ["Add Subscriber", "View Subscriber", "Update Subscriber", "Delete Subscriber", "Restart Subscriber", "Exit"]
+    return ["Add Subscriber", "View Subscriber", "Update Subscriber", "Delete Subscriber", "Re-Connect Subscriber", "Disconnect Subscriber", "Exit"]
 
 
 def Switch(choice):
@@ -33,16 +37,6 @@ def Switch(choice):
 
 def AddSubscriber():
     global collection
-    # subscriber = {
-	# 	"subscriber_id": 1,
-	# 	"type":"default",
-	# 	"topic":"test/topic",
-	# 	"publisher": False,
-	# 	"subscriber": True,
-	# 	"default": 35,
-	# 	"status": True
-	# }
-    # print(collection)
     
 
     last_record = collection.find_one({}, sort=[('subscriber_id',DESCENDING)])
@@ -121,10 +115,40 @@ def acceptSubscriberData(subscriber):
         clearScreen()
         key = 0
         value = 0
-        input(f"Sensors can't be of same details -> {key}:{value}\nPress enter tocontinue...")
+        input(f"Subscribers can't be of same details -> {key}:{value}\nPress enter to continue...")
         return None
 
 def ViewSubscriber():
+    clearScreen()
+    
+    tableColumnHeadings = []    # "_id","subscriber_id","type","topic","publisher","subscriber","default","status"
+
+    for i in data.ACTIVE_SUBSCRIBERS[0].keys():
+        tableColumnHeadings.append(i)    
+
+    # tableColumnHeadings.append("Sr_No")
+    table = PrettyTable(tableColumnHeadings)
+
+    # for row in data.ACTIVE_SENSORS:
+    #     table.add_row([row["_id"],row["sensor_id"],row["type"],row["topic"],row["publisher"], row["subscriber"], row["default"], row["status"]])
+
+    for row in data.ACTIVE_SUBSCRIBERS:
+        table.add_row([
+            row[tableColumnHeadings[0]],
+            row[tableColumnHeadings[1]],
+            row[tableColumnHeadings[2]],
+            row[tableColumnHeadings[3]],
+            row[tableColumnHeadings[4]],
+            row[tableColumnHeadings[5]],
+            row[tableColumnHeadings[6]]])
+    
+    for i in tableColumnHeadings:
+        table.align[i] = "c"
+
+    table.align["topic"] = "l"
+    print(table)
+
+    input("\nPress Enter To Continue...")
     pass
 
 def UpdateSubscriber():
@@ -141,6 +165,7 @@ def TurnOnSubscriber():
 
 def TurnOffSubscriber():
     pass
+
 
 def Menu(client):
     clearScreen()

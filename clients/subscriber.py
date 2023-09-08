@@ -7,6 +7,8 @@ broker_port = 1883
 # Callback function when a message is received
 def on_message(client, userdata, message):
     print(f"Received message on topic '{message.topic}': {message.payload.decode()}")
+    # print(f"Received message on topic '{message.topic}': {message}")
+
 
 # Create a MQTT client instance
 client = mqtt.Client()
@@ -23,7 +25,7 @@ client.on_message = on_message
 
 # Subscribe to a topic
 # topic = "test/topic"
-topic = "sensors/temeprature"
+topic = "sensors/temperature"
 client.subscribe(topic)
 # topic = "test/topic1"
 topic = "sensors/humidity"

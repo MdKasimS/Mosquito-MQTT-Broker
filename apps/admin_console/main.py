@@ -29,7 +29,6 @@ subPool = data.SUBTHREADPOOL
 active_sensors = data.ACTIVE_SENSORS
 active_subscribers = data.ACTIVE_SUBSCRIBERS
 active_topics = data.ACTIVE_TOPICS
-
 # Global data : End 
 
 def simulate_sensor(thread,sensor):
@@ -49,18 +48,24 @@ def simulate_sensor(thread,sensor):
         print("No Broker Found Running...")
         return
 
+    try:
+        # Update Topics
+        topic = {
+            "sensor_id" : sensor["sensor_id"],
+    		"topic" : sensor["topic"],
+    		"threadId" : pubPool[thread].ident, #thread.ident,
+    		"timestamp" : datetime.datetime.now().isoformat()
+        }
+        topics.insert_one(topic)
+    except Exception as e:
+        input("CHeck error....")
+
+     # Generate a unique filename for each sensor
+    filename = f"sensor_{sensor['sensor_id']}.txt"
+    
     # Publish a message to a topic
     topic = sensor["topic"]
-
-    # Update Topics
-    topic = {
-        "sensor_id" : sensor["sensor_id"],
-		"topic" : sensor["topic"],
-		"threadId" : pubPool[thread].ident, #thread.ident,
-		"timestamp" : datetime.datetime.now().isoformat()
-    }
-    topics.insert_one(topic)
-
+    
     while THREADCONTROL is None:
 
         # Simulate sensor data
@@ -74,14 +79,16 @@ def simulate_sensor(thread,sensor):
             "timestamp" : datetime.datetime.now().isoformat()
         }
 
+
         # Publish data in string formatted only
         try:
             client.publish(topic, str(sensor_data))
         except Exception as e:
+            StopAllClients()
             client.disconnect()
-        
-        # Generate a unique filename for each sensor
-        filename = f"sensor_{sensor['sensor_id']}.txt"
+            print("Error Occured In Broker")
+            input(e)
+       
         
         # Write data to the text file [FOR TESTING]
         with open(filename, "a") as file:
@@ -91,11 +98,47 @@ def simulate_sensor(thread,sensor):
             # Sleep for a while before the next reading
             time.sleep(1)
 
+def subscribe(thread, mqtt_subscriber):
 
-def subscribe():
+    # Callback function when a message is received
+    def on_message(client, userdata, message): # Not accessible outside subscribe() function.
+        # Write data to the text file [FOR TESTING]
+        with open(filename, "a") as file:
+            file.write(f"{message.topic} : {message.payload.decode()}\n")
 
-    pass
+            # Sleep for a while before the next reading
+            # time.sleep(1)
+    
+    # Define the MQTT broker details. <<Modification: Needs Redis Subscriber>>>
+    broker_address = setting["broker_address"] 
+    broker_port = setting["broker_port"] 
 
+    # Create a MQTT client instance
+    client = mqtt.Client()
+
+    # Connect to the MQTT broker
+    try:
+        client.connect(broker_address, broker_port)
+    except Exception as e:
+        print("No Broker Found Running...")
+        return
+
+    # Set the message received callback
+    client.on_message = on_message
+
+     # Generate a unique filename for each sensor
+    filename = f"subscriber_{mqtt_subscriber['subscriber_id']}.txt"
+    
+    # Publish a message to a topic
+    topic = mqtt_subscriber["topic"]
+    client.subscribe(topic)
+
+    client.loop_start()
+
+    while THREADCONTROL is None:
+        
+            # time.sleep(1)
+        pass
 
 def redis():
 
@@ -107,13 +150,10 @@ def redis():
 
         #publisher code
 
-
         pass
 
-
 def getMenuList():
-    return ["Manage Sensors", "Manage Subscribers", "Manage Topics", "Re-Start All Clients","Stop All Threads","Exit"]
-
+    return ["Manage Sensors", "Manage Subscribers", "Manage Topics", "Re-Start All Clients","Stop All Clients","Exit"]
 
 def Switch(choice):
     action = {
@@ -130,17 +170,14 @@ def Switch(choice):
         clearScreen()
         input("Enter the valid choice. Press enter to continue")
 
-
 def ManageSensor():
     sensor.Menu()
-
 
 def ManageSubscriber():
     subscriber.Menu(client)
 
-
 def ManageTopic():
-    broker.Menu()
+    broker.Menu(client)
 
 def StartClients(active_clients):
 
@@ -148,12 +185,13 @@ def StartClients(active_clients):
     THREADCONTROL = None
     # Create and start multiple threads for simulating sensors.
     for counter, mqtt_client in enumerate(active_clients):
-        thread = threading.Thread(target=simulate_sensor, args=(counter, mqtt_client))
         if mqtt_client["publisher"] == True: 
+            thread = threading.Thread(target=simulate_sensor, args=(counter, mqtt_client))
             pubPool.append(thread)
         else:
+            thread = threading.Thread(target=subscribe, args=(counter, mqtt_client))
             subPool.append(thread)
-            # input("This is subscriber")
+            input("This is subscriber")
         
         thread.start()
 
@@ -171,15 +209,16 @@ def StopAllClients():
     THREADCONTROL = 1
     topics.delete_many({})
 
-    # clearScreen()
-    # input("All clients have been restarted. Press enter to continue...")
+    clearScreen()
+    input("All clients have been stopped successfully. Press enter to continue...")
 
 def RestartClients():
     
     StopAllClients()
     StartClients(active_sensors)
+
     # StartRedis()
-    # StartThreads(active_subscribers)
+    StartClients(active_subscribers)
 
     clearScreen()
     input("All clients have been restarted. Press enter to continue...")
@@ -205,9 +244,6 @@ def main():
     # Start redis
     # StartRedis() 
 
-    
-  
-
     # Load database-subscribers data
     cursor = subscribers.find()
     for mqtt_client in cursor:
@@ -216,7 +252,8 @@ def main():
             # input("We got a subscriber...")
     
        
-    # Start default subscribers with default values-Threads        
+    # Start default subscribers with default values-Threads
+    StartClients(active_subscribers)        
 
     while True:
 

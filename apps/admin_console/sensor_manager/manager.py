@@ -105,15 +105,13 @@ def AddSensor():
 def ViewSensor():
     clearScreen()
     
-    tableColumnHeadings = []
-            # "_id","sensor_id","type","topic","publisher","subscriber","default","status"
+    tableColumnHeadings = []    # "_id","sensor_id","type","topic","publisher","subscriber","default","status"
 
     for i in data.ACTIVE_SENSORS[0].keys():
         tableColumnHeadings.append(i)    
 
     # tableColumnHeadings.append("Sr_No")
     table = PrettyTable(tableColumnHeadings)
-
 
     # for row in data.ACTIVE_SENSORS:
     #     table.add_row([row["_id"],row["sensor_id"],row["type"],row["topic"],row["publisher"], row["subscriber"], row["default"], row["status"]])
