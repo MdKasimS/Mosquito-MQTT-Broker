@@ -68,9 +68,6 @@ def simulate_sensor(thread,sensor):
         sensor_value = sensor["default"] + (random.randint(0, 100) % 50)/100
         sensor_value = round(sensor_value, 3)
 
-        # Generate a unique filename for each sensor
-        filename = f"sensor_{sensor['sensor_id']}.txt"
-
         # Prepare payload
         sensor_data = { 
             "sensor_id" : sensor["sensor_id"],
@@ -83,6 +80,9 @@ def simulate_sensor(thread,sensor):
             client.publish(topic, str(sensor_data))
         except Exception as e:
             client.disconnect()
+        
+        # Generate a unique filename for each sensor
+        filename = f"sensor_{sensor['sensor_id']}.txt"
         
         # Write data to the text file [FOR TESTING]
         with open(filename, "a") as file:
@@ -103,12 +103,12 @@ def redis():
 
         #publisher code
 
-        
+
         pass
 
 
 def getMenuList():
-    return ["Manage Sensors", "Manage Subscribers", "Manage Topics", "Re-Start All Clients","Exit"]
+    return ["Manage Sensors", "Manage Subscribers", "Manage Topics", "Re-Start All Clients","StopAllThreads","Exit"]
 
 
 def Switch(choice):
@@ -117,7 +117,8 @@ def Switch(choice):
         2: ManageSubscriber,
         3: ManageTopic,
         4: RestartClients,
-        5: Exit
+        5: StopAllThreads,
+        6: Exit
     }
     if choice in action.keys():
         return action[choice]
@@ -141,11 +142,9 @@ def StartThreads(active_clients):
 
     # Create and start multiple threads for simulating sensors.
     for counter, mqtt_client in enumerate(active_clients):
-        # input(f"{mqtt_client} {counter}")
         thread = threading.Thread(target=simulate_sensor, args=(counter, mqtt_client))
         if mqtt_client["publisher"] == True: 
             pubPool.append(thread)
-            # input("This is publisher")
         else:
             subPool.append(thread)
             # input("This is subscriber")
@@ -156,14 +155,21 @@ def StartRedis():
     thread = threading.Thread(target=redis)
     thread.start()
 
-    # input(type(pubPool[0]))
-    # for i in pubPool:
-    #     input(i)
+    thread.getName
+    for i in pubPool:
+        input(i)
+
+def StopAllThreads():
+    global THREADCONTROL
+    THREADCONTROL = 1
 
 
 def RestartClients():
-
     global active_sensors
+    global THREADCONTROL
+
+    StopAllThreads()
+    THREADCONTROL = None
     StartThreads(active_sensors)
     # StartRedis()
     # StartThreads(active_subscribers)
