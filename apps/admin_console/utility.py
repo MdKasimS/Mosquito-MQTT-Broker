@@ -1,15 +1,6 @@
 import os
 import sys
-import json
 
-
-
-def getSettings():
-    with open("../../settings.json") as file:
-        return json.load(file)
-
-
-CONFIGURATION = getSettings()
 
 
 def WelcomeNote():
@@ -17,6 +8,8 @@ def WelcomeNote():
     print(" "*5 + "|| Exalens IoT Networks ||")
     print(" " * 7 + "Network Admin Console")
     print("----------------------------------")
+    print("< Note: Use Admin Console For Network Management >")
+
 
 
 def clearScreen():

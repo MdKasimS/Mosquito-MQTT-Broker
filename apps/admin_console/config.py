@@ -1,7 +1,9 @@
 import json
 import sys
+import time
 from pymongo import MongoClient
 from pymongo.errors import ServerSelectionTimeoutError
+from database import data
 
 
 def loadSettings(filePath):
@@ -33,9 +35,13 @@ def connectDatabase():
 
 
 # Constants
-FILEPATH = "./configuration.json"
-CONFIG = loadSettings(FILEPATH)
+CONFIG_FILEPATH = "./configuration.json"
+SETTING_FILEPATH = "../../settings.json"
+CONFIG = loadSettings(CONFIG_FILEPATH)
+SETTING = loadSettings(SETTING_FILEPATH)
 CLIENT = connectDatabase()
+
+
 
 
 # Tests

@@ -60,6 +60,7 @@ def AddSensor():
             input("Enter the valid choice. Press enter to continue")
             continue
 
+        # For inserting one record
         if choice == 1:
             sensor = acceptSensorData(sensor)
             if sensor is not None:
@@ -68,6 +69,7 @@ def AddSensor():
                 clearScreen()
                 input("Unexpected Error Occured. Press enter to continue...")
                 return
+        # For inserting many records
         else:
             flag = True
             records = []
@@ -149,7 +151,7 @@ def acceptSensorData(sensor):
             sensor["topic"] = "test/" + value
 
         sensor["publisher"] = True
-        sensor["subscriber"] = False,
+        sensor["subscriber"] = False
 
         # Get default sensor value
         value = float(input("Enter default sensor value : "))

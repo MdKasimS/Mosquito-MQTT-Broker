@@ -22,9 +22,11 @@ except ConnectionRefusedError:
 client.on_message = on_message
 
 # Subscribe to a topic
-topic = "test/topic"
+# topic = "test/topic"
+topic = "sensors/temeprature"
 client.subscribe(topic)
-topic = "test/topic1"
+# topic = "test/topic1"
+topic = "sensors/humidity"
 client.subscribe(topic)
 
 

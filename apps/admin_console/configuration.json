@@ -10,6 +10,7 @@
         "subscribers",
         "sensor_data",
         "active_sensors",
-        "active_subscribers"
+        "active_subscribers",
+        "current_topics"
     ]
 }
