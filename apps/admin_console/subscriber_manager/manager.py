@@ -140,7 +140,8 @@ def ViewSubscriber():
             row[tableColumnHeadings[3]],
             row[tableColumnHeadings[4]],
             row[tableColumnHeadings[5]],
-            row[tableColumnHeadings[6]]])
+            row[tableColumnHeadings[6]],
+            row[tableColumnHeadings[7]]])
     
     for i in tableColumnHeadings:
         table.align[i] = "c"
