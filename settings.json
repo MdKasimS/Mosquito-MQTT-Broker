@@ -8,6 +8,6 @@
     "database_type":"NOSQL",
     "database_address": "mongodb://127.0.0.1:27017/",
     "database_name":"iot_data",
-    "redis_address": "",
+    "redis_address": "localhost",
     "redis_port": 6379
 }

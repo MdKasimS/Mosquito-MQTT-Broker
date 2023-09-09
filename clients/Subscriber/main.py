@@ -1,3 +1,4 @@
+import time
 import paho.mqtt.client as mqtt
 from config import CONFIG as config
 from config import CLIENT as client
@@ -11,8 +12,16 @@ topicList = []
 # Global data : End
 
 
+# Redis cache implementation to handle messages
+def StartRedis():
+
+    pass
+
+
+
 # Callback function when a message is received
 def on_message(client, userdata, message):
+    
     print(f"Received message on topic '{message.topic}': {message.payload.decode()}")
     # print(f"Received message on topic '{message.topic}': {message}")
 
@@ -32,6 +41,7 @@ def main():
         # Set the message received callback
         client.on_message = on_message
 
+
         # Load database-topics data
         cursor = topics.find()
         topicList = []
@@ -48,7 +58,7 @@ def main():
         # Start the MQTT loop to handle incoming        messages
         client.loop_start()
 
-        # Keep the script running
+        # Keep the script running. [Actually it should be running till topics are active.]
         while True:
             pass
 
@@ -56,10 +66,12 @@ def main():
         print("No broker running on machine.\nPlease wait, application terminating in 3 seconds...")
         exit(0)
     except ValueError:
-        print("No sensors running in the network. Application terminating please wait...") 
+        print("No sensors running in the network. Application terminating please wait...")
+        client.loop_stop() 
     except KeyboardInterrupt:
         # Disconnect from the MQTT broker on Ctrl+C
-        input("Client disconnected. Press enter to quit application.")
+        time.sleep(1)
+        print("Client disconnected. Press enter to quit application.")
         client.disconnect()
 
 if __name__ == "__main__":
