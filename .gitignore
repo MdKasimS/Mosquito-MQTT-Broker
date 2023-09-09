@@ -74,3 +74,6 @@ apps/admin_console/subscriber_2.txt
 apps/admin_console/subscriber_3.txt
 apps/admin_console/subscriber_manager/__pycache__/manager.cpython-310.pyc
 apps/admin_console/subscriber_manager/__pycache__/manager.cpython-310.pyc
+clients/Subscriber/__pycache__/utility.cpython-310.pyc
+apps/admin_console/subscriber_manager/__pycache__/manager.cpython-310.pyc
+clients/__pycache__/config.cpython-310.pyc

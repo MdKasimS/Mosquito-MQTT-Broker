@@ -185,7 +185,7 @@ def Menu(client):
         while choice != len(getMenuList()):
             WelcomeNote()
 
-            for counter, option in enumerate    (getMenuList()):
+            for counter, option in enumerate(getMenuList()):
                 print(f"{counter+1}.{option}")
 
             try:
