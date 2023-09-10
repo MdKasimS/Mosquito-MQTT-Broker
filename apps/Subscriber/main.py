@@ -92,8 +92,8 @@ def main():
         #-------------------- Set MQTT --------------------------------
 
         # MQTT broker details
-        broker_address = "localhost"
-        broker_port = 1883
+        broker_address = config["broker_address"]
+        broker_port = config["broker_port"]
 
         # Create a MQTT client instance
         client = mqtt.Client()
@@ -118,10 +118,13 @@ def main():
 
 
         #------------------ Set Redis ----------------------------------
+        input(config)
         # Redis connection details (these are default settings)
-        redis_host = "localhost"
-        redis_port = 6379
-        redis_db = 0
+        redis_host = config["redis_address"]
+        redis_port = config["redis_port"]
+        redis_db = config["redis_db"]
+        print(f"Redis details are : {redis_host}, {redis_port} {redis_db}")
+
 
         # Connect to a Redis server 
         try:
@@ -132,12 +135,6 @@ def main():
             exit(0)
 
 
-
-        # for i in sensor_data.keys():
-        #     # Retrieve a value by key
-        #     value = redis_connection.get(i)
-        #     print(value.decode())  # Decode bytes to a string
-
         # Set callback when publishers diconnects
         client.on_disconnect = on_disconnect
         # Set the message received callback
@@ -147,25 +144,11 @@ def main():
         client.loop_start()    
 
 
-
         # Keep the script running. [Actually it should be running till topics are active.]
         global RELOAD
         while True : #RELOAD is None:
             pass
-        # else:
-        #     print("Reload has bee changed")
-        #     RELOAD = None
-        #     script_file = sys.argv[0]
-        #     try:
-        #         # Read the script's content
-        #         with open(script_file, 'r') as file:
-        #             script_content = file.read()
-
-        #         # Execute the script's content
-        #         exec(script_content, globals())
-        #     except Exception as e:
-        #         print(f"Failed to reload the script: {e}")
-
+       
     except ConnectionRefusedError:
         print("No broker running on machine.\nPlease wait, application terminating in 3 seconds...")
         exit(0)
