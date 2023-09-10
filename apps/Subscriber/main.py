@@ -21,7 +21,6 @@ def StartRedis():
 
     pass
 
-# def reloadScript():
 def on_disconnect(client, userdata, rc):
     clearScreen()
     global RELOAD
@@ -38,14 +37,21 @@ def on_message(client, userdata, message):
         if message.topic!= "publisher/status": # Only when publisher is publishing sensor readings. Else try reconnecting util manual exit.
 
             # Decode MQTT payload get message in Python <class = 'str'> format
-            message = message.payload.decode()
+            # message = message.payload.decode()
 
             # Make payload to JSON compatible format to get sensor data in format dictionary sent by sensors
-            message = message.replace("'", '"')
-            message = json.loads(message)
+            # message = message.replace("'", '"')
+            # message = json.loads(message)
 
             # Publish decoded payload to Redis broker - populating Redis cache
-            redis_connection.set(message["sensor_id"], str(message))
+            # redis_connection.set(message.topic, str(message))
+
+             # Store the message in Redis list
+            redis_connection.lpush(message.topic, message.payload.decode())
+
+            # Keep only the latest 10 messages in the list
+            redis_connection.ltrim(message.topic, 0, 9)
+
         else: # Keep subscriber reconnecting, until publisher re-starts
             clearScreen()
             print(f"{message.topic}:{message.payload.decode()}")
@@ -122,7 +128,7 @@ def main():
             global redis_connection
             redis_connection = redis.StrictRedis(host=redis_host, port=redis_port, db= redis_db)
         except Exception as e:
-            print("No redis cache on machine")
+            print("Did not found redis cache in system")
             exit(0)
 
 

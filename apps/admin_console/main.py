@@ -143,21 +143,16 @@ def subscribe(thread, mqtt_subscriber):
     client.loop_start()
 
     while THREADCONTROL is None:
-        
             # time.sleep(1)
         pass
 
-def redis():
+def redis_cache():
+    redis_host = config["redis_address"]
+    redis_port = config["redis_port"]
+    redis_db = config["redis_db"][0]
 
-    redis_queue = queue.Queue()
-
-    while THREADCONTROL is None:
-
-        #subscriber code
-
-        #publisher code
-
-        pass
+    print(f"Redis details are : {redis_host}, {redis_port} {redis_db}")
+    pass
 
 def getMenuList():
     return ["Manage Sensors", "Manage Subscribers", "Manage Topics", "Re-Start All Clients","Stop All Clients","Exit"]
@@ -203,7 +198,7 @@ def StartClients(active_clients):
         thread.start()
 
 def StartRedis():
-    thread = threading.Thread(target=redis)
+    thread = threading.Thread(target=redis_cache)
     thread.start()
 
     thread.getName
@@ -258,7 +253,7 @@ def main():
             active_subscribers.append(mqtt_client)
             # input("We got a subscriber...")
     
-       
+    time.sleep(2)   
     # Start default subscribers with default values-Threads
     StartClients(active_subscribers)        
 
