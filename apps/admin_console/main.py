@@ -38,8 +38,15 @@ def simulate_sensor(thread,sensor):
     broker_address = setting["broker_address"] 
     broker_port = setting["broker_port"] 
 
+    # Last Will and Testament (LWT) configuration
+    lwt_topic = "publisher/status"
+    lwt_message = "Publisher disconnected"
+
     # Create a MQTT client instance
     client = mqtt.Client()
+
+    # Set the LWT message
+    client.will_set(lwt_topic, lwt_message, qos=1, retain=True)
 
     # Connect to the MQTT broker
     try:
@@ -271,7 +278,16 @@ def main():
             clearScreen()
             input("Enter the valid choice. Press enter  to continue")
             continue
-        
+        except KeyboardInterrupt:
+            # Disconnect from the MQTT broker on Ctrl+C
+            # client.close()
+            global THREADCONTROL
+            THREADCONTROL = 1
+            clearScreen()
+            print("System terminating. Please wait...")
+            time.sleep(2)
+            exit(0)
+
         execute = Switch(choice)
 
         try:
