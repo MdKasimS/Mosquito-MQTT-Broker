@@ -2306,3 +2306,11 @@
 {'sensor_id': 17, 'value': 69.58, 'timestamp': '2023-09-11T11:02:56.172782'}
 {'sensor_id': 17, 'value': 69.37, 'timestamp': '2023-09-11T11:02:57.560807'}
 {'sensor_id': 17, 'value': 69.46, 'timestamp': '2023-09-11T11:02:58.729646'}
+{'sensor_id': 17, 'value': 69.47, 'timestamp': '2023-09-11T11:03:00.131966'}
+{'sensor_id': 17, 'value': 69.41, 'timestamp': '2023-09-11T11:03:01.303213'}
+{'sensor_id': 17, 'value': 69.65, 'timestamp': '2023-09-11T11:03:02.411345'}
+{'sensor_id': 17, 'value': 69.69, 'timestamp': '2023-09-11T11:03:03.696642'}
+{'sensor_id': 17, 'value': 69.63, 'timestamp': '2023-09-11T11:03:04.876566'}
+{'sensor_id': 17, 'value': 69.26, 'timestamp': '2023-09-11T11:03:06.091686'}
+{'sensor_id': 17, 'value': 69.48, 'timestamp': '2023-09-11T11:03:07.301372'}
+{'sensor_id': 17, 'value': 69.59, 'timestamp': '2023-09-11T11:03:08.642920'}
