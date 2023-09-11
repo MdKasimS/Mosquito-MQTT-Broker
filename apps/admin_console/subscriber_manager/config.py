@@ -19,7 +19,6 @@ def connectDatabase():
     
     # Attempt to connect to the MongoDB cluster
     client = MongoClient(CONFIG["database_address"])
-    
     try:
         # Check if the connection was successful
         if client.server_info():

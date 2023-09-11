@@ -5,6 +5,7 @@
     "database_type": "NOSQL",
     "database_address": "mongodb://127.0.0.1:27017/",
     "database_name": "iot_data",
+    "db_connection": "Disconnected",
     "collection_list": [
         "sensors",
         "subscribers",

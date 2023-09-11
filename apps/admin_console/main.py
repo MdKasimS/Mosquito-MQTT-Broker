@@ -8,7 +8,7 @@ import paho.mqtt.client as mqtt
 
 from sensor_manager import manager as sensor
 from subscriber_manager import manager as subscriber
-from broker_manager import manager as broker
+# from broker_manager import manager as broker
 
 from utility import clearScreen
 from utility import Exit
@@ -179,7 +179,8 @@ def ManageSubscriber():
     subscriber.Menu(client)
 
 def ManageTopic():
-    broker.Menu(client)
+    pass
+    # broker.Menu(client)
 
 def StartClients(active_clients):
 
