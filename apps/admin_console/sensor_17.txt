@@ -1771,3 +1771,9 @@
 {'sensor_id': 17, 'value': 69.54, 'timestamp': '2023-09-11T09:02:32.293115'}
 {'sensor_id': 17, 'value': 69.61, 'timestamp': '2023-09-11T09:02:33.553612'}
 {'sensor_id': 17, 'value': 69.56, 'timestamp': '2023-09-11T09:02:34.719543'}
+{'sensor_id': 17, 'value': 69.62, 'timestamp': '2023-09-11T09:14:32.372870'}
+{'sensor_id': 17, 'value': 69.33, 'timestamp': '2023-09-11T09:14:33.376761'}
+{'sensor_id': 17, 'value': 69.36, 'timestamp': '2023-09-11T09:14:34.391263'}
+{'sensor_id': 17, 'value': 69.26, 'timestamp': '2023-09-11T09:14:35.530770'}
+{'sensor_id': 17, 'value': 69.34, 'timestamp': '2023-09-11T09:14:36.750427'}
+{'sensor_id': 17, 'value': 69.32, 'timestamp': '2023-09-11T09:14:38.004479'}
