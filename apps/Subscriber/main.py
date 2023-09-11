@@ -25,8 +25,8 @@ def on_disconnect(client, userdata, rc):
     clearScreen()
     global RELOAD
     RELOAD = 1
-    print("I am reloading...")
-    client.reconnect()
+    # print("I am reloading...")
+    # client.reconnect()
 
 # Callback function when a MQTT message is received. Use this to populate Redis cache
 def on_message(client, userdata, message):
@@ -65,8 +65,16 @@ def on_message(client, userdata, message):
                 exec(script_content, globals())
             except Exception as e:
                 print(f"Failed to reload the script: {e}")
+
+    except redis.ConnectionError as e:
+        clearScreen()
+        print("Did not found any redis server.\nApplication terminating please wait...")
+        client.disconnect()
+        global RELOAD
+        RELOAD = 1
+        sys.exit(0)
     except Exception as e:
-        print("Error in message processing...")
+        print("Error in message processing...", e)
         return
 
 def main():
@@ -104,7 +112,7 @@ def main():
             print("Broker is live")
         except ConnectionRefusedError:
             print("No broker running on machine")
-            exit(0)
+            sys.exit(0)
 
         # Subscribe to a topic
         for j in topicList:
@@ -118,12 +126,11 @@ def main():
 
 
         #------------------ Set Redis ----------------------------------
-        input(config)
+
         # Redis connection details (these are default settings)
         redis_host = config["redis_address"]
         redis_port = config["redis_port"]
-        redis_db = config["redis_db"]
-        print(f"Redis details are : {redis_host}, {redis_port} {redis_db}")
+        redis_db = 0 #config["redis_db"][0]
 
 
         # Connect to a Redis server 
@@ -132,7 +139,7 @@ def main():
             redis_connection = redis.StrictRedis(host=redis_host, port=redis_port, db= redis_db)
         except Exception as e:
             print("Did not found redis cache in system")
-            exit(0)
+            sys.exit(0)
 
 
         # Set callback when publishers diconnects
@@ -146,7 +153,7 @@ def main():
 
         # Keep the script running. [Actually it should be running till topics are active.]
         global RELOAD
-        while True : #RELOAD is None:
+        while RELOAD is None:
             pass
        
     except ConnectionRefusedError:
@@ -164,3 +171,6 @@ def main():
 if __name__ == "__main__":
     main()
 
+# docker run -d --name redis-stack -p 6379:6379 -p 8001:8001 -e REDIS_ARGS="--requirepass mypassword" redis/redis-stack:latest
+# docker run -d --name redis-stack -p 6379:6379 -p 8001:8001 redis/redis-stack:latest
+# docker run -v redisinsight:/db -p 8001:8001 redislabs/redisinsight
