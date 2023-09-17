@@ -109,6 +109,8 @@ def subscribe(thread, mqtt_subscriber):
 
     # Callback function when a message is received
     def on_message(client, userdata, message): # Not accessible outside subscribe() function.
+        
+        
         # Write data to the text file [FOR TESTING]
         with open(filename, "a") as file:
             file.write(f"{message.topic} : {message.payload.decode()}\n")
@@ -133,7 +135,7 @@ def subscribe(thread, mqtt_subscriber):
     # Set the message received callback
     client.on_message = on_message
 
-     # Generate a unique filename for each sensor
+    # Generate a unique filename for each sensor
     filename = f"subscriber_{mqtt_subscriber['subscriber_id']}.txt"
     
     # Publish a message to a topic

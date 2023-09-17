@@ -81,3 +81,6 @@ clients/__pycache__/config.cpython-310.pyc
 apps/admin_console/subscriber_4.txt
 apps/admin_console/sensor_17.txt
 apps/admin_console/sensor_17.txt
+apps/subscriber/log.txt
+apps/subscriber/subscriber_786.csv
+apps/subscriber/Redis_Published_Data.txt

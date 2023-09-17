@@ -1,5 +1,6 @@
 import json
 import sys
+import threading
 import time
 import redis
 import paho.mqtt.client as mqtt
@@ -10,16 +11,51 @@ from utility import clearScreen
 # Global data : Start
 client = None
 redis_connection = None
+redis_list = []
 db = mongo_client[config["database_name"]]
 topics = db["current_topics"]
+sensors_data = db["sensor_data"]
 RELOAD = None
+RELOAD_CNT = 0
+THREADCONTROL = None
 # Global data : End
 
 
-# Redis cache implementation to handle messages
-def StartRedis():
+# Redis Publisher - Publishing Redis cache data
+def RedisPublisher():
+    global THREADCONTROL
+    global redis_list
+    redis_channel = "sensors/humidity"
 
-    pass
+    fileName = "Redis_Published_Data.txt"
+    #-------------------- Redis Data Publisher Code ------------------------------    
+  
+    # Initialize the list size to 0
+    list_size = 0
+    while THREADCONTROL is None:
+        # Check the current size of the Redis list
+        current_list_size = redis_connection.llen("sensors/humidity")
+
+        # If the list size has increased, publish the new data
+        if current_list_size > list_size:
+        
+            # Calculate the number of new items added
+            num_new_items = current_list_size - list_size
+        
+            # Retrieve the new items from the list
+            new_data = redis_connection.lrange("sensors/humidity", -num_new_items, -1)
+        
+            # Publish the new data to the Redis channel
+            for item in new_data:
+                data = str(item)
+                redis_connection.publish(redis_channel, data)
+                print(item)
+                with open(fileName, "a") as file:
+                    file.write(data)
+        
+            # Update the list size
+            list_size = current_list_size
+
 
 def on_disconnect(client, userdata, rc):
     clearScreen()
@@ -28,11 +64,12 @@ def on_disconnect(client, userdata, rc):
     # print("I am reloading...")
     # client.reconnect()
 
+# MQTT Subscriber core code part 2
 # Callback function when a MQTT message is received. Use this to populate Redis cache
 def on_message(client, userdata, message):
     
     try:
-        print(f"Received message on topic '{message.topic}': {message.payload.decode()}")
+        # print(f"Received message on topic '{message.topic}': {message.payload.decode()}")
         
         if message.topic!= "publisher/status": # Only when publisher is publishing sensor readings. Else try reconnecting util manual exit.
 
@@ -46,25 +83,44 @@ def on_message(client, userdata, message):
             # Publish decoded payload to Redis broker - populating Redis cache
             # redis_connection.set(message.topic, str(message))
 
-             # Store the message in Redis list
+            #------------------- Redis Server Caching Code ---------------------------------
+
+            # Store the message in Redis list
             redis_connection.lpush(message.topic, message.payload.decode())
 
             # Keep only the latest 10 messages in the list
             redis_connection.ltrim(message.topic, 0, 9)
 
-        else: # Keep subscriber reconnecting, until publisher re-starts
-            clearScreen()
-            print(f"{message.topic}:{message.payload.decode()}")
-            script_file = sys.argv[0]
-            try:
-                # Read the script's content
-                with open(script_file, 'r') as file:
-                    script_content = file.read()
 
-                # Execute the script's content
-                exec(script_content, globals())
-            except Exception as e:
-                print(f"Failed to reload the script: {e}")
+            # Retrieve data from Redis list
+            # data_from_redis = []
+            # redis_list_key = "sensors/humidity"
+            
+            # while True:
+            #     item = redis_connection.rpop(redis_list_key)
+            #     if item is None:
+            #         break
+            #     data_from_redis.append(item.decode())
+
+            # # Insert data into MongoDB
+            # if data_from_redis:
+            #     # Create MongoDB documents and insert them into the collection
+            #     documents = [{"data": item} for item in data_from_redis]
+            #     sensors_data.insert_many(documents) 
+
+        # else: # Keep subscriber reconnecting, until publisher re-starts
+        #     clearScreen()
+        #     print(f"{message.topic}:{message.payload.decode()}")
+        #     script_file = sys.argv[0]
+        #     try:
+        #         # Read the script's content
+        #         with open(script_file, 'r') as file:
+        #             script_content = file.read()
+
+        #         # Execute the script's content
+        #         exec(script_content, globals())
+        #     except Exception as e:
+        #         print(f"Failed to reload the script: {e}")
 
     except redis.ConnectionError as e:
         clearScreen()
@@ -75,10 +131,12 @@ def on_message(client, userdata, message):
         sys.exit(0)
     except Exception as e:
         print("Error in message processing...", e)
+        
         return
 
 def main():
     try:
+        global THREADCONTROL
         try:
             # Load data from database
             topicList = []
@@ -123,8 +181,6 @@ def main():
         lwt_topic = "publisher/status"
         client.subscribe(lwt_topic)
 
-
-
         #------------------ Set Redis ----------------------------------
 
         # Redis connection details (these are default settings)
@@ -132,20 +188,22 @@ def main():
         redis_port = config["redis_port"]
         redis_db = 0 #config["redis_db"][0]
 
-
         # Connect to a Redis server 
         try:
             global redis_connection
             redis_connection = redis.StrictRedis(host=redis_host, port=redis_port, db= redis_db)
+            thread_redis_pub = threading.Thread(target = RedisPublisher)
+            thread_redis_pub.start()
         except Exception as e:
             print("Did not found redis cache in system")
             sys.exit(0)
 
 
-        # Set callback when publishers diconnects
-        client.on_disconnect = on_disconnect
-        # Set the message received callback
+        #-------------- Subscriber core code part 1-------------------
+        # Set the message received callback  
         client.on_message = on_message
+        # Set callback when publishers disconnects
+        client.on_disconnect = on_disconnect
 
         # Start the MQTT loop to handle incoming messages
         client.loop_start()    
@@ -164,6 +222,7 @@ def main():
         client.loop_stop()
     except KeyboardInterrupt:
         # Disconnect from the MQTT broker on Ctrl+C
+        THREADCONTROL = 1
         print("Client disconnected. Application is terminating please wait...")
         time.sleep(1)
         client.disconnect()

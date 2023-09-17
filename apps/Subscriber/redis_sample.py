@@ -11,15 +11,14 @@ def on_message(client, userdata, message):
     
     try:
         # print(f"Received message on topic '{message.topic}': {message.payload.decode()}")
-        
+
         # Decode MQTT payload get message in Python <class = 'str'> format
         message = message.payload.decode()
+        # Make payload to JSON compatible format to get sensor data in format dictionary sent bysensors
         message = message.replace("'", '"')
         message = json.loads(message)
-
-        # Publish decoded payload to Redis broker - populating Redis cache
-        redis_connection.set(message["sensor_id"], str(message))
-
+        print(message)
+        
     except Exception as e:
         print("Error in message processing...")
         return
