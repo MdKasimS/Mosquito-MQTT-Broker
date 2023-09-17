@@ -22,40 +22,45 @@ THREADCONTROL = None
 
 
 # Redis Publisher - Publishing Redis cache data
-def RedisPublisher():
+def RedisPublisher(redisChannel):
+    # time.sleep(2)
     global THREADCONTROL
     global redis_list
-    redis_channel = "sensors/humidity"
+    global redis_connection
+    redis_channel = redisChannel
 
     fileName = "Redis_Published_Data.txt"
     #-------------------- Redis Data Publisher Code ------------------------------    
-  
-    # Initialize the list size to 0
-    list_size = 0
-    while THREADCONTROL is None:
-        # Check the current size of the Redis list
-        current_list_size = redis_connection.llen("sensors/humidity")
+    
+    try:
+        while THREADCONTROL is None:
 
-        # If the list size has increased, publish the new data
-        if current_list_size > list_size:
-        
-            # Calculate the number of new items added
-            num_new_items = current_list_size - list_size
-        
-            # Retrieve the new items from the list
-            new_data = redis_connection.lrange("sensors/humidity", -num_new_items, -1)
-        
-            # Publish the new data to the Redis channel
-            for item in new_data:
-                data = str(item)
-                redis_connection.publish(redis_channel, data)
-                print(item)
-                with open(fileName, "a") as file:
-                    file.write(data)
-        
-            # Update the list size
-            list_size = current_list_size
+             # Initialize the list size to 0
+            list_size = 0
 
+            # Check the current size of the Redis list
+            current_list_size = redis_connection.llen(redis_channel)
+
+            # If the list size has increased, publish the new data
+            if current_list_size > list_size:
+            
+                # Calculate the number of new items added
+                num_new_items = current_list_size - list_size
+
+                # Retrieve the new items from the list
+                new_data = redis_connection.lrange(redis_channel, -num_new_items, -1)
+
+                # Publish the new data to the Redis channel
+                for item in new_data:
+                    data = str(item)
+                    redis_connection.publish(redis_channel, data)
+                    with open(fileName, "a") as file:
+                        file.write(f"{data}\n")
+
+                # Update the list size
+                list_size = current_list_size
+    except Exception as e:
+        print("Error in RedisPublisher...", e)
 
 def on_disconnect(client, userdata, rc):
     clearScreen()
@@ -108,25 +113,27 @@ def on_message(client, userdata, message):
             #     documents = [{"data": item} for item in data_from_redis]
             #     sensors_data.insert_many(documents) 
 
-        # else: # Keep subscriber reconnecting, until publisher re-starts
-        #     clearScreen()
-        #     print(f"{message.topic}:{message.payload.decode()}")
-        #     script_file = sys.argv[0]
-        #     try:
-        #         # Read the script's content
-        #         with open(script_file, 'r') as file:
-        #             script_content = file.read()
+        else: # Keep subscriber reconnecting, until publisher re-starts
+            clearScreen()
+            print(f"{message.topic}:{message.payload.decode()}")
+            script_file = sys.argv[0]
+            try:
+                # Read the script's content
+                with open(script_file, 'r') as file:
+                    script_content = file.read()
 
-        #         # Execute the script's content
-        #         exec(script_content, globals())
-        #     except Exception as e:
-        #         print(f"Failed to reload the script: {e}")
+                # Execute the script's content
+                exec(script_content, globals())
+            except Exception as e:
+                print(f"Failed to reload the script: {e}")
 
     except redis.ConnectionError as e:
         clearScreen()
         print("Did not found any redis server.\nApplication terminating please wait...")
         client.disconnect()
         global RELOAD
+        global THREADCONTROL
+        THREADCONTROL = 1
         RELOAD = 1
         sys.exit(0)
     except Exception as e:
@@ -152,6 +159,7 @@ def main():
                 # print("Terminating application. Please wait...")
                 # time.sleep(1)
                 # exit(0)
+            redisChannelList = list(set(topicList))
         except Exception as e:
             print("Unable to get topics....")
 
@@ -192,8 +200,10 @@ def main():
         try:
             global redis_connection
             redis_connection = redis.StrictRedis(host=redis_host, port=redis_port, db= redis_db)
-            thread_redis_pub = threading.Thread(target = RedisPublisher)
-            thread_redis_pub.start()
+            for i in redisChannelList:
+                print(f"Redis Channel : {i}")
+                thread_redis_pub = threading.Thread(target = RedisPublisher, args= [i])
+                thread_redis_pub.start()
         except Exception as e:
             print("Did not found redis cache in system")
             sys.exit(0)
@@ -216,9 +226,11 @@ def main():
        
     except ConnectionRefusedError:
         print("No broker running on machine.\nPlease wait, application terminating in 3 seconds...")
+        THREADCONTROL = 1
         exit(0)
     except ValueError:
         print("No sensors running in the network. Application terminating please wait...")
+        THREADCONTROL = 1
         client.loop_stop()
     except KeyboardInterrupt:
         # Disconnect from the MQTT broker on Ctrl+C
