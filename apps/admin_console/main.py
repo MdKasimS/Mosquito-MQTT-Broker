@@ -1,7 +1,9 @@
 import queue
 import random
+import sys
 import threading
 import time
+import redis
 import datetime
 import paho.mqtt.client as mqtt
 
@@ -19,10 +21,13 @@ from database import data
 # Global data : Start
 THREADCONTROL = None
 
+redis_connection = None
+
 db = client[config["database_name"]] #"iot_data"
 sensors = db[config["collection_list"][0]]
 subscribers = db[config["collection_list"][1]]
 topics = db[config["collection_list"][5]]
+sensors_data = db[config["collection_list"][2]]
 
 pubPool = data.PUBTHREADPOOL
 subPool = data.SUBTHREADPOOL
@@ -31,9 +36,7 @@ active_subscribers = data.ACTIVE_SUBSCRIBERS
 active_topics = data.ACTIVE_TOPICS
 # Global data : End 
 
-def simulate_sensor(thread,sensor):
-
-         
+def simulate_sensor(thread,sensor):       
     # Define the MQTT broker details
     broker_address = setting["broker_address"] 
     broker_port = setting["broker_port"] 
@@ -109,8 +112,6 @@ def subscribe(thread, mqtt_subscriber):
 
     # Callback function when a message is received
     def on_message(client, userdata, message): # Not accessible outside subscribe() function.
-        
-        
         # Write data to the text file [FOR TESTING]
         with open(filename, "a") as file:
             file.write(f"{message.topic} : {message.payload.decode()}\n")
@@ -118,7 +119,7 @@ def subscribe(thread, mqtt_subscriber):
             # Sleep for a while before the next reading
             # time.sleep(1)
     
-    # Define the MQTT broker details. <<Modification: Needs Redis Subscriber>>>
+    # Define the MQTT broker details. <<<Modification: Needs Redis Subscriber>>>
     broker_address = setting["broker_address"] 
     broker_port = setting["broker_port"] 
 
@@ -148,14 +149,21 @@ def subscribe(thread, mqtt_subscriber):
             # time.sleep(1)
         pass
 
-def redis_cache():
+def connectRedis():
+    global redis_connection
     redis_host = config["redis_address"]
     redis_port = config["redis_port"]
     redis_db = config["redis_db"][0]
+    print(f"Redis host : {redis_host}\nRedis port : {redis_port}\nRedis db : {redis_db}")
 
-    print(f"Redis details are : {redis_host}, {redis_port} {redis_db}")
-    pass
-
+    # Connect to a Redis server 
+    try:
+        global redis_connection
+        redis_connection = redis.StrictRedis(host=redis_host, port=redis_port, db= redis_db)
+    except Exception as e:
+        print("Did not found redis cache in system")
+        sys.exit(0)
+    
 def getMenuList():
     return ["Manage Sensors", "Manage Subscribers", "Manage Topics", "Re-Start All Clients","Stop All Clients","Exit"]
 
@@ -185,7 +193,6 @@ def ManageTopic():
     # broker.Menu(client)
 
 def StartClients(active_clients):
-
     global THREADCONTROL
     THREADCONTROL = None
     # Create and start multiple threads for simulating sensors.
@@ -200,13 +207,48 @@ def StartClients(active_clients):
         
         thread.start()
 
-def StartRedis():
-    thread = threading.Thread(target=redis_cache)
-    thread.start()
+def StartRedis(redisChannels):
+    
+    try:
+        for i in redisChannels:
+            print(i)
+            thread = threading.Thread(target=RedisToDb, args=[i])
+            thread.start()
+    except Exception as e:
+        input(f"Error in starting redis..., {e}")
+        sys.exit(0)
 
-    thread.getName
-    for i in pubPool:
-        input(i)
+
+#----------------- Redis Subscriber Code ----------------------
+def RedisToDb(redisChannel):
+
+    # Subscribe to the Redis channel
+    pubsub = redis_connection.pubsub()
+    pubsub.subscribe(redisChannel)
+    
+    fileName = f"sensor_data.txt"
+
+    try:
+        while THREADCONTROL is None:
+        
+            # Listen for messages on the Redis channel
+            for message in pubsub.listen():
+                
+                if message['type'] == 'message':
+
+                    # Decode the message from bytes to string
+                    data = message['data'].decode('utf-8')
+                    # print(f"Received message: {data}")
+
+                    with open(fileName, "a") as file:
+                        file.write(f"{data}\n")
+
+                    # Insert the data into the MongoDB collection
+                    # sensors_data.insert_one({"message": data})
+
+    except Exception as e:
+        print("Error in RedisToDb....", e)
+
 
 def StopAllClients():
     global THREADCONTROL
@@ -222,13 +264,15 @@ def RestartClients():
     StopAllClients()
     StartClients(active_sensors)
 
-    # StartRedis()
-    StartClients(active_subscribers)
+    StartRedis()
+
+    # StartClients(active_subscribers)
 
     clearScreen()
     input("All clients have been restarted. Press enter to continue...")
 
-def main():
+def main(): 
+
     clearScreen()
 
     # Load database-sensors data
@@ -247,18 +291,21 @@ def main():
         topicList.append(i['topic'])
 
     # Start redis
-    # StartRedis() 
+    connectRedis()
+    StartRedis(list(set(topicList))) 
 
+    #-------------- Arrangement For Testing ------------------------------
     # Load database-subscribers data
-    cursor = subscribers.find()
-    for mqtt_client in cursor:
-        if mqtt_client["status"] == True and mqtt_client["topic"] in topicList: # And if its topic is in topic collection
-            active_subscribers.append(mqtt_client)
-            # input("We got a subscriber...")
+    # cursor = subscribers.find()
+    # for mqtt_client in cursor:
+    #     if mqtt_client["status"] == True and mqtt_client["topic"] in topicList: # And if its topic is in topic collection
+    #         active_subscribers.append(mqtt_client)
+    #         # input("We got a subscriber...")
     
     time.sleep(2)   
     # Start default subscribers with default values-Threads
-    StartClients(active_subscribers)        
+    # StartClients(active_subscribers)        
+    #----------------------------------------------------------------------
 
     while True:
 
@@ -292,9 +339,9 @@ def main():
             if execute is not None:
                 execute()
         except Exception as e:
-            client
+            # client
+            THREADCONTROL = 1
         clearScreen()
-
 
 if __name__ == "__main__":
     main()

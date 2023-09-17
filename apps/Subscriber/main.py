@@ -12,6 +12,7 @@ from utility import clearScreen
 client = None
 redis_connection = None
 redis_list = []
+redisChannelList = []
 db = mongo_client[config["database_name"]]
 topics = db["current_topics"]
 sensors_data = db["sensor_data"]
@@ -21,25 +22,39 @@ THREADCONTROL = None
 # Global data : End
 
 
+def connectRedis():
+    global redis_connection
+    redis_host = config["redis_address"]
+    redis_port = config["redis_port"]
+    redis_db = 0 #config["redis_db"][0]
+    # print(f"Redis host : {redis_host}\nRedis port : {redis_port}\nRedis db : {redis_db}")
+
+    # Connect to a Redis server 
+    try:
+        return redis.StrictRedis(host=redis_host, port=redis_port, db= redis_db)
+    except Exception as e:
+        print("Did not found redis cache in system")
+        sys.exit(0)
+
 # Redis Publisher - Publishing Redis cache data
 def RedisPublisher(redisChannel):
-    # time.sleep(2)
     global THREADCONTROL
     global redis_list
     global redis_connection
     redis_channel = redisChannel
+    redis_connection = connectRedis()
+    fileName = "Redis_Published_Data.txt" # [FOR TESTING]
 
-    fileName = "Redis_Published_Data.txt"
     #-------------------- Redis Data Publisher Code ------------------------------    
-    
     try:
         while THREADCONTROL is None:
 
-             # Initialize the list size to 0
+            # Initialize the list size to 0
             list_size = 0
 
             # Check the current size of the Redis list
             current_list_size = redis_connection.llen(redis_channel)
+            
 
             # If the list size has increased, publish the new data
             if current_list_size > list_size:
@@ -54,13 +69,15 @@ def RedisPublisher(redisChannel):
                 for item in new_data:
                     data = str(item)
                     redis_connection.publish(redis_channel, data)
-                    with open(fileName, "a") as file:
-                        file.write(f"{data}\n")
+                    # with open(fileName, "a") as file:
+                    #     file.write(f"{data}\n")
 
                 # Update the list size
                 list_size = current_list_size
+
     except Exception as e:
-        print("Error in RedisPublisher...", e)
+        print("Error in Redis Publisher...", e)
+        # time.sleep(1)
 
 def on_disconnect(client, userdata, rc):
     clearScreen()
@@ -89,33 +106,17 @@ def on_message(client, userdata, message):
             # redis_connection.set(message.topic, str(message))
 
             #------------------- Redis Server Caching Code ---------------------------------
-
             # Store the message in Redis list
             redis_connection.lpush(message.topic, message.payload.decode())
 
             # Keep only the latest 10 messages in the list
             redis_connection.ltrim(message.topic, 0, 9)
 
-
-            # Retrieve data from Redis list
-            # data_from_redis = []
-            # redis_list_key = "sensors/humidity"
-            
-            # while True:
-            #     item = redis_connection.rpop(redis_list_key)
-            #     if item is None:
-            #         break
-            #     data_from_redis.append(item.decode())
-
-            # # Insert data into MongoDB
-            # if data_from_redis:
-            #     # Create MongoDB documents and insert them into the collection
-            #     documents = [{"data": item} for item in data_from_redis]
-            #     sensors_data.insert_many(documents) 
-
         else: # Keep subscriber reconnecting, until publisher re-starts
+            global redis_list
             clearScreen()
             print(f"{message.topic}:{message.payload.decode()}")
+            redis_list = []
             script_file = sys.argv[0]
             try:
                 # Read the script's content
@@ -144,27 +145,27 @@ def on_message(client, userdata, message):
 def main():
     try:
         global THREADCONTROL
+        global redisChannelList
         try:
             # Load data from database
             topicList = []
             cursor = topics.find()
             for i in cursor:
                 topicList.append(i["topic"])
-            if len(topicList) !=0 :
-                print("Listening on topics: ")
-                for j in topicList:
-                    print(j)
-            else:
+            if len(topicList) ==0 :
                 print("No sensors in network")
                 # print("Terminating application. Please wait...")
                 # time.sleep(1)
                 # exit(0)
-            redisChannelList = list(set(topicList))
+            else:
+                redisChannelList = list(set(topicList))
+                print("Listening on topics: ")
+                for j in redisChannelList:
+                    print(j)
         except Exception as e:
             print("Unable to get topics....")
 
         #-------------------- Set MQTT --------------------------------
-
         # MQTT broker details
         broker_address = config["broker_address"]
         broker_port = config["broker_port"]
@@ -190,7 +191,6 @@ def main():
         client.subscribe(lwt_topic)
 
         #------------------ Set Redis ----------------------------------
-
         # Redis connection details (these are default settings)
         redis_host = config["redis_address"]
         redis_port = config["redis_port"]
@@ -201,12 +201,12 @@ def main():
             global redis_connection
             redis_connection = redis.StrictRedis(host=redis_host, port=redis_port, db= redis_db)
             for i in redisChannelList:
-                print(f"Redis Channel : {i}")
+                # print("Redis publisher started...")
                 thread_redis_pub = threading.Thread(target = RedisPublisher, args= [i])
                 thread_redis_pub.start()
         except Exception as e:
-            print("Did not found redis cache in system")
-            sys.exit(0)
+            print("Did not found redis cache in system", e)
+            # sys.exit(0)
 
 
         #-------------- Subscriber core code part 1-------------------
