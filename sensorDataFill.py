@@ -47,15 +47,47 @@ data = [
     {'sensor_id': 13, 'value': 25.77, 'timestamp': '2023-09-18T00:16:12.596418'},
 ]
 
-for i in data:
+
+data2 = [
+{'sensor_id': 21, 'value': 87.83, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 38, 373635)},
+{'sensor_id': 15, 'value': 34.9, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 38, 658652)},{'sensor_id': 17, 'value': 69.71, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 39, 557603)},
+{'sensor_id': 11, 'value': 41.19, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 40, 566888)},
+{'sensor_id': 19, 'value': 41.65, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 40, 566888)},
+{'sensor_id': 12, 'value': 15.75, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 41, 577121)},
+{'sensor_id': 17, 'value': 69.53, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 41, 578097)},
+{'sensor_id': 16, 'value': 67.17, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 42, 589222)},
+{'sensor_id': 19, 'value': 41.4, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 42, 589222)},{'sensor_id': 12, 'value': 15.53, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 43, 599929)},
+{'sensor_id': 18, 'value': 31.27, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 44, 607803)},
+{'sensor_id': 14, 'value': 36.77, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 44, 719209)},
+{'sensor_id': 20, 'value': 46.23, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 45, 619749)},
+{'sensor_id': 13, 'value': 25.88, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 46, 451598)},
+{'sensor_id': 19, 'value': 41.3, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 46, 637261)},{'sensor_id': 11, 'value': 40.82, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 47, 647565)},
+{'sensor_id': 17, 'value': 69.63, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 47, 646599)},
+{'sensor_id': 11, 'value': 41.1, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 48, 653967)},{'sensor_id': 20, 'value': 46.49, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 48, 654835)},
+{'sensor_id': 12, 'value': 15.79, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 49, 665569)},
+{'sensor_id': 18, 'value': 31.24, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 50, 675273)},
+{'sensor_id': 14, 'value': 36.8, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 50, 769514)},{'sensor_id': 17, 'value': 69.48, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 51, 684260)},
+{'sensor_id': 14, 'value': 36.83, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 51, 778557)},
+{'sensor_id': 20, 'value': 46.28, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 52, 697434)},
+{'sensor_id': 12, 'value': 15.56, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 53, 707172)},
+{'sensor_id': 18, 'value': 31.58, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 53, 707172)},
+{'sensor_id': 12, 'value': 15.85, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 54, 720672)},
+{'sensor_id': 18, 'value': 31.24, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 55, 727714)},
+{'sensor_id': 16, 'value': 67.16, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 55, 728583)},
+{'sensor_id': 19, 'value': 41.54, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 56, 744552)},
+{'sensor_id': 14, 'value': 36.96, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 56, 838439)},
+{'sensor_id': 20, 'value': 46.43, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 57, 754346)},
+{'sensor_id': 12, 'value': 15.76, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 57, 756075)},
+{'sensor_id': 20, 'value': 46.54, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 58, 760983)},
+{'sensor_id': 16, 'value': 67.24, 'timestamp': datetime.datetime(2023, 9, 18, 8, 3, 59, 770295)},
+{'sensor_id': 22, 'value': 51.42, 'timestamp': datetime.datetime(2023, 9, 18, 8, 4, 0, 572234)},{'sensor_id': 11, 'value': 41.08, 'timestamp': datetime.datetime(2023, 9, 18, 8, 4, 0, 775555)},{'sensor_id': 21, 'value': 87.82, 'timestamp': datetime.datetime(2023, 9, 18, 8, 4, 1, 579884)},{'sensor_id': 11, 'value': 41.18, 'timestamp': datetime.datetime(2023, 9, 18, 8, 4, 1, 785775)},{'sensor_id': 22, 'value': 51.43, 'timestamp': datetime.datetime(2023, 9, 18, 8, 4, 2, 588422)}
+] 
+
+for i in data2:
     print(i['sensor_id'], i['value'], i['timestamp'])
-    stamp = datetime.datetime.fromisoformat(i['timestamp'])
-    print(type(stamp))
-    bson_utc_datetime = ObjectId.from_datetime(stamp)
-    print(type(bson_utc_datetime))
 
     document = {
-        "timestamp": datetime.datetime.utcnow(),#{"$date":bson_utc_datetime},
+        "timestamp": i['timestamp'],#{"$date":bson_utc_datetime},
         "sensor_id": i['sensor_id'],
         "value": i['value']
     }

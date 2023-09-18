@@ -1,4 +1,3 @@
-import queue
 import random
 import sys
 import threading
@@ -105,8 +104,8 @@ def simulate_sensor(thread,sensor):
 
             # Sleep for a while before the next reading
             time.sleep(1)
-    else:
-        print("Closing simulate_sensor....")
+    # else:
+    #     print("Closing simulate_sensor....")
 
 def subscribe(thread, mqtt_subscriber):
 
@@ -162,7 +161,7 @@ def connectRedis():
         redis_connection = redis.StrictRedis(host=redis_host, port=redis_port, db= redis_db)
     except Exception as e:
         print("Did not found redis cache in system")
-        sys.exit(0)
+        exit(0)
     
 def getMenuList():
     return ["Manage Sensors", "Manage Subscribers", "Manage Topics", "Re-Start All Clients","Stop All Clients","Exit"]
@@ -243,8 +242,8 @@ def RedisToDb(redisChannel):
 
                     # Insert the data into the MongoDB collection
                     # sensors_data.insert_one({"message": data})
-        else:
-            print("Closing RedisToDb....")
+        # else:
+        #     print("Closing RedisToDb....")
 
     except Exception as e:
         print("Error in RedisToDb....", e)
@@ -261,6 +260,7 @@ def StopAllClients():
 def RestartClients():
     
     StopAllClients()
+
     StartClients(active_sensors)
 
     StartRedis()
@@ -276,9 +276,9 @@ def main():
 
     # Load database-sensors data
     cursor = sensors.find()
-    for mqtt_client in cursor:
-        if mqtt_client["status"] == True:
-            active_sensors.append(mqtt_client)
+    for mqtt_client_sensor in cursor:
+        if mqtt_client_sensor["status"] == True:
+            active_sensors.append(mqtt_client_sensor)
 
      # Start default sensors with default values-Threads.
     StartClients(active_sensors)
@@ -340,7 +340,7 @@ def main():
                 if choice == len(getMenuList()):
                     THREADCONTROL = 1
         except Exception as e:
-            # client
+            client
             THREADCONTROL = 1
         clearScreen()
 

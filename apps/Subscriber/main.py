@@ -38,7 +38,6 @@ def connectRedis():
 
 # Redis Publisher - Publishing Redis cache data
 def RedisPublisher(redisChannel):
-    global THREADCONTROL
     global redis_list
     global redis_connection
     redis_channel = redisChannel
@@ -47,33 +46,35 @@ def RedisPublisher(redisChannel):
 
     #-------------------- Redis Data Publisher Code ------------------------------    
     try:
-        while THREADCONTROL is None:
+        global THREADCONTROL
 
-            # Initialize the list size to 0
-            list_size = 0
+        while THREADCONTROL is None:
 
             # Check the current size of the Redis list
             current_list_size = redis_connection.llen(redis_channel)
             
-
-            # If the list size has increased, publish the new data
-            if current_list_size > list_size:
-            
-                # Calculate the number of new items added
-                num_new_items = current_list_size - list_size
-
-                # Retrieve the new items from the list
-                new_data = redis_connection.lrange(redis_channel, -num_new_items, -1)
-
+            if current_list_size >= 10:
+        
+                # Pop out the last message from the Redis list
+                popped_message = redis_connection.rpop(redis_channel)
+                data = str(popped_message)
+                
                 # Publish the new data to the Redis channel
-                for item in new_data:
-                    data = str(item)
-                    redis_connection.publish(redis_channel, data)
-                    # with open(fileName, "a") as file:
-                    #     file.write(f"{data}\n")
-
-                # Update the list size
-                list_size = current_list_size
+                redis_connection.publish(redis_channel, data)
+                
+                data = data.replace("'",'"')
+                data = json.loads(data)
+                
+                document = {
+                    "sensor_id" : data["sensor_id"],
+                    "value" : data["value"],
+                    "timestamp" : data["timestamp"]
+                }
+                print(document)
+                with open(fileName, "a") as file:
+                    file.write(f"{type(data)}\n")
+                
+                time.sleep(1)
 
     except Exception as e:
         print("Error in Redis Publisher...", e)
@@ -128,7 +129,10 @@ def on_message(client, userdata, message):
             #     exec(script_content, globals())
             # except Exception as e:
             #     print(f"Failed to reload the script: {e}")
+            print("Clients disconnected.... Waiting for re-connection!")
+            time.sleep(10)
             print("Restart Application.... [Restart Needed]")
+
 
     except redis.ConnectionError as e:
         clearScreen()
@@ -209,7 +213,6 @@ def main():
         except Exception as e:
             print("Did not found redis cache in system", e)
             exit(0)
-
 
         #-------------- Subscriber core code part 1-------------------
         # Set the message received callback  
