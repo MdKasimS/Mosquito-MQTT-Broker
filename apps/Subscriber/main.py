@@ -95,6 +95,7 @@ def on_message(client, userdata, message):
         
         if message.topic!= "publisher/status": # Only when publisher is publishing sensor readings. Else try reconnecting util manual exit.
 
+            #--------------------Testing Arrangement --------------------------------------
             # Decode MQTT payload get message in Python <class = 'str'> format
             # message = message.payload.decode()
 
@@ -113,20 +114,21 @@ def on_message(client, userdata, message):
             redis_connection.ltrim(message.topic, 0, 9)
 
         else: # Keep subscriber reconnecting, until publisher re-starts
-            global redis_list
+            # global redis_list
             clearScreen()
-            print(f"{message.topic}:{message.payload.decode()}")
-            redis_list = []
-            script_file = sys.argv[0]
-            try:
-                # Read the script's content
-                with open(script_file, 'r') as file:
-                    script_content = file.read()
+            # print(f"{message.topic}:{message.payload.decode()}")
+            # redis_list = []
+            # script_file = sys.argv[0]
+            # try:
+            #     # Read the script's content
+            #     with open(script_file, 'r') as file:
+            #         script_content = file.read()
 
-                # Execute the script's content
-                exec(script_content, globals())
-            except Exception as e:
-                print(f"Failed to reload the script: {e}")
+            #     # Execute the script's content
+            #     exec(script_content, globals())
+            # except Exception as e:
+            #     print(f"Failed to reload the script: {e}")
+            print("Restart Application.... [Restart Needed]")
 
     except redis.ConnectionError as e:
         clearScreen()
@@ -154,9 +156,9 @@ def main():
                 topicList.append(i["topic"])
             if len(topicList) ==0 :
                 print("No sensors in network")
-                # print("Terminating application. Please wait...")
-                # time.sleep(1)
-                # exit(0)
+                print("Terminating application. Please wait...")
+                time.sleep(1)
+                exit(0)
             else:
                 redisChannelList = list(set(topicList))
                 print("Listening on topics: ")
@@ -179,7 +181,7 @@ def main():
             print("Broker is live")
         except ConnectionRefusedError:
             print("No broker running on machine")
-            sys.exit(0)
+            exit(0)
 
         # Subscribe to a topic
         for j in topicList:
@@ -206,7 +208,7 @@ def main():
                 thread_redis_pub.start()
         except Exception as e:
             print("Did not found redis cache in system", e)
-            # sys.exit(0)
+            exit(0)
 
 
         #-------------- Subscriber core code part 1-------------------
@@ -217,7 +219,6 @@ def main():
 
         # Start the MQTT loop to handle incoming messages
         client.loop_start()    
-
 
         # Keep the script running. [Actually it should be running till topics are active.]
         global RELOAD
@@ -232,12 +233,14 @@ def main():
         print("No sensors running in the network. Application terminating please wait...")
         THREADCONTROL = 1
         client.loop_stop()
+        exit(0)
     except KeyboardInterrupt:
         # Disconnect from the MQTT broker on Ctrl+C
         THREADCONTROL = 1
         print("Client disconnected. Application is terminating please wait...")
         time.sleep(1)
         client.disconnect()
+        exit(0)
 
 if __name__ == "__main__":
     main()

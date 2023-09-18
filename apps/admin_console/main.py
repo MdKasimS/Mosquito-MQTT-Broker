@@ -64,7 +64,7 @@ def simulate_sensor(thread,sensor):
             "sensor_id" : sensor["sensor_id"],
     		"topic" : sensor["topic"],
     		"threadId" : pubPool[thread].ident, #thread.ident,
-    		"timestamp" : datetime.datetime.now().isoformat()
+    		"timestamp" : datetime.datetime.utcnow() #datetime.datetime.now().isoformat()
         }
         topics.insert_one(topic)
     except Exception as e:
@@ -86,9 +86,8 @@ def simulate_sensor(thread,sensor):
         sensor_data = { 
             "sensor_id" : sensor["sensor_id"],
             "value" : sensor_value,
-            "timestamp" : datetime.datetime.now().isoformat()
+            "timestamp" : datetime.datetime.utcnow()
         }
-
 
         # Publish data in string formatted only
         try:
@@ -98,7 +97,6 @@ def simulate_sensor(thread,sensor):
             client.disconnect()
             print("Error Occured In Broker")
             input(e)
-       
         
         # Write data to the text file [FOR TESTING]
         with open(filename, "a") as file:
@@ -107,6 +105,8 @@ def simulate_sensor(thread,sensor):
 
             # Sleep for a while before the next reading
             time.sleep(1)
+    else:
+        print("Closing simulate_sensor....")
 
 def subscribe(thread, mqtt_subscriber):
 
@@ -208,7 +208,6 @@ def StartClients(active_clients):
         thread.start()
 
 def StartRedis(redisChannels):
-    
     try:
         for i in redisChannels:
             print(i)
@@ -217,7 +216,6 @@ def StartRedis(redisChannels):
     except Exception as e:
         input(f"Error in starting redis..., {e}")
         sys.exit(0)
-
 
 #----------------- Redis Subscriber Code ----------------------
 def RedisToDb(redisChannel):
@@ -229,11 +227,11 @@ def RedisToDb(redisChannel):
     fileName = f"sensor_data.txt"
 
     try:
+        global THREADCONTROL
         while THREADCONTROL is None:
         
             # Listen for messages on the Redis channel
             for message in pubsub.listen():
-                
                 if message['type'] == 'message':
 
                     # Decode the message from bytes to string
@@ -241,14 +239,15 @@ def RedisToDb(redisChannel):
                     # print(f"Received message: {data}")
 
                     with open(fileName, "a") as file:
-                        file.write(f"{data}\n")
+                        file.write(f"{data}- {type(message)}\n")
 
                     # Insert the data into the MongoDB collection
                     # sensors_data.insert_one({"message": data})
+        else:
+            print("Closing RedisToDb....")
 
     except Exception as e:
         print("Error in RedisToDb....", e)
-
 
 def StopAllClients():
     global THREADCONTROL
@@ -294,7 +293,7 @@ def main():
     connectRedis()
     StartRedis(list(set(topicList))) 
 
-    #-------------- Arrangement For Testing ------------------------------
+    #-------------- Arrangement For Testing MQTT Subscriber Simulators------------------
     # Load database-subscribers data
     # cursor = subscribers.find()
     # for mqtt_client in cursor:
@@ -302,7 +301,7 @@ def main():
     #         active_subscribers.append(mqtt_client)
     #         # input("We got a subscriber...")
     
-    time.sleep(2)   
+    # time.sleep(2)   
     # Start default subscribers with default values-Threads
     # StartClients(active_subscribers)        
     #----------------------------------------------------------------------
@@ -325,7 +324,7 @@ def main():
             continue
         except KeyboardInterrupt:
             # Disconnect from the MQTT broker on Ctrl+C
-            # client.close()
+            client.close()
             global THREADCONTROL
             THREADCONTROL = 1
             clearScreen()
@@ -338,6 +337,8 @@ def main():
         try:
             if execute is not None:
                 execute()
+                if choice == len(getMenuList()):
+                    THREADCONTROL = 1
         except Exception as e:
             # client
             THREADCONTROL = 1
