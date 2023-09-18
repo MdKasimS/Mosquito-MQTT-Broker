@@ -37,6 +37,35 @@ How to start this application? Instruction -
 14. Start FastApi app by running apps/fast_api/main.py
 
 
+Design Overview :
+1. 'admin-console' app is publisher and manager app. Its a menu driven console application.
+2. 'subscriber' app is a subscriber app which subscribe to MQTT publisher channels and receive messages from broker.
+3. Sensors are simulated using threads in apps/admin-console. I have created threads which are centrally being controlled using variable named THREADCONTROL in whole solution.
+4. Sensors publish data on respective channel and store its log in 'sensor_{id}.txt' files. Sensors are MQTT Publisher clients
+5. Published messages by sensor threads are received by subscriber app which stores them in queues named sensors/temeparture and sensors/humidty. Both these queues are of size 10.
+6. Subscriber app after storing messags in redis cache, publishes to redis channels one by one by popping out messages.
+7. In admin-console app, redis subscriber subscribes to redic channels and receives messages which are later stored in MongoDB database.
+8. FastAPI end point fetches data from MongoDB for given sensor id.
+
+Challenges:
+1. Understaing Mosquitto and MQTT
+2. Installing redis specially on Windos using Docker
+3. Creating complex mechanism to handle exceptions and thread execution code.
+4. Handling asynchrous calls.
+5. Debugging thread codes and reading sensor logs
+
+Here is system architecture:-
+![image](https://github.com/MdKasimS/Mosquito-MQTT-IoT-Application/assets/45384577/83fce8e9-dbcc-41bf-8a9e-a83f4db1689a)
+
+Here is stages of development:-
+![image](https://github.com/MdKasimS/Mosquito-MQTT-IoT-Application/assets/45384577/e19e9025-58a4-4f56-86c9-4a943fb4c827)
+
+Here is block diagram:-
+![image](https://github.com/MdKasimS/Mosquito-MQTT-IoT-Application/assets/45384577/c1a72dd7-f5a2-4d93-aa46-ca42d5c0746c)
+
+Here is functional block diagram:-
+![image](https://github.com/MdKasimS/Mosquito-MQTT-IoT-Application/assets/45384577/a2e61aec-af88-4947-98b8-c20878f4581b)
+
 More advanced controlling features coming soon....
 
 Author:-
