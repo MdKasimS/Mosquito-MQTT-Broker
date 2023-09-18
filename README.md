@@ -4,11 +4,11 @@ This is a IoT netwok management tool which uses Mosquitto Server as MQTT broker 
 In this sensors as MQTT clients are acting as publishers publishing sensor value in {"sensor_id": <unique_id>, "value" : <sensor_reading>, "timestamp": <IO8601_Formatted_Timestamp> } format.
 
 It contains apps as follows:
-  A. Mosquitto broker manager - ./main.py
-  B. Mosquitto publisher - apps/admin_console/main.py
-  C. Mosquitto subscriber - apps/subscriber/main.py
-  D. FastAPI endpoint app - apps/fast_api/main.py
-  E. Dashboard app - apps/dashboard/     ----------> [Coming soon]
+  1. Mosquitto broker manager - ./main.py
+  2. Mosquitto publisher - apps/admin_console/main.py
+  3. Mosquitto subscriber - apps/subscriber/main.py
+  4. FastAPI endpoint app - apps/fast_api/main.py
+  5. Dashboard app - apps/dashboard/     ----------> [Coming soon]
 It also implements Redis Cache to store first 10 messages in queues named as sensors/temperature and sensors/humidity.
 
 Design of this system is stored in Mosquitto-MQTT-IoT-Application.drawio file.
